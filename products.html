@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware Ecosystem | Vibe Computer Engineering</title>
+    <!-- Tailwind CSS & FontAwesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="theme.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#0D0A06',       /* Almost black background */
+                            card: 'rgba(245, 166, 35, 0.08)', /* Warm glass panel */
+                            border: 'rgba(245, 166, 35, 0.15)', /* Orange trace */
+                            primary: '#F5A623',   /* Vibrant Orange */
+                            secondary: '#5B8DB8', /* Blue-Grey Text */
+                            accent: '#FFD166'     /* Bright Yellow for gradients */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0D0A06;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(245, 166, 35, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(245, 166, 35, 0.1);
+        }
+        .amber-gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 40%, #F5A623 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tab-active {
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.15), rgba(255, 209, 102, 0.05));
+            border-color: #F5A623 !important;
+            color: #FFFFFF !important;
+        }
+        /* Custom scrollbar to match theme */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0D0A06; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #F5A623, #FFD166); border-radius: 10px; }
+
+        /* Brand Logo Hover Animations */
+        .logo-container:hover .logo-svg {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 10px rgba(245, 166, 35, 0.5));
+        }
+        .logo-container .logo-symbol {
+            transform-origin: 152px 33px;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .logo-container:hover .logo-symbol {
+            transform: rotate(15deg);
+        }
+        
+        /* Category Card Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes hoverGlow {
+            0% {
+                box-shadow: 0 0 20px rgba(245, 166, 35, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(245, 166, 35, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(245, 166, 35, 0.3);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        
+        .category-card {
+            animation: slideInUp 0.6s ease-out forwards;
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .category-card:nth-child(1) { animation-delay: 0.1s; }
+        .category-card:nth-child(2) { animation-delay: 0.2s; }
+        .category-card:nth-child(3) { animation-delay: 0.3s; }
+        .category-card:nth-child(4) { animation-delay: 0.4s; }
+        .category-card:nth-child(5) { animation-delay: 0.5s; }
+        
+        .category-card:hover {
+            animation: hoverGlow 2s ease-in-out infinite;
+        }
+        
+        .category-title {
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover .category-title {
+            transform: scale(1.05);
+            color: #FFD166;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background-color: #0D0A06;
+            border: 2px solid #F5A623;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 0 60px rgba(245, 166, 35, 0.4);
+            animation: slideInUp 0.4s ease-out;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-close {
+            color: #F5A623;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .modal-close:hover {
+            color: #FFD166;
+        }
+    </style>
+</head>
+<body class="text-slate-300 antialiased selection:bg-brand-primary/30">
+
+    <!-- Ambient Amber Logo Glow Decals -->
+    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-[50%] right-1/4 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-[150px] pointer-events-none"></div>
+
+    <!-- Dynamic Navigation Bar -->
+    <!-- Dynamic Modern Navigation Bar -->
+<header class="sticky top-0 z-50 w-full bg-brand-darker/90 backdrop-blur-md border-b border-brand-border/80 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <!-- Logo Section -->
+        <a href="index.html" class="flex items-center group logo-container">
+            <svg class="h-16 w-auto logo-svg transition-all duration-300" viewBox="0 0 250 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- vibe text wordmark -->
+                <g stroke="#F5A623" stroke-width="10.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                    <!-- v -->
+                    <path d="M 16,22 L 28,49 L 40,22" />
+                    <!-- i -->
+                    <path d="M 53,33 L 53,49" />
+                    <!-- b -->
+                    <path d="M 66,12 L 66,49 M 66,22 A 13.5,13.5 0 0,1 66,49" />
+                    <!-- e -->
+                    <path d="M 93,35 H 118 A 13.5,13.5 0 1,0 105,49" />
+                </g>
+                <!-- i dot -->
+                <circle cx="53" cy="17" r="5.25" fill="#F5A623" />
+                
+                <!-- Symbol (3 rounded diamonds) -->
+                <g class="logo-symbol" stroke="#E2E8F0" stroke-width="2.2" fill="none" opacity="0.9">
+                    <rect x="-9.5" y="-9.5" width="19" height="19" rx="4" ry="4" transform="translate(152, 23) rotate(45)" />
+                    <rect x="-9.5" y="-9.5" width="19" height="19" rx="4" ry="4" transform="translate(139, 42) rotate(45)" />
+                    <rect x="-9.5" y="-9.5" width="19" height="19" rx="4" ry="4" transform="translate(165, 42) rotate(45)" />
+                </g>
+                <!-- Golden Chevron in Symbol -->
+                <path class="logo-symbol" d="M 147,33 L 152,38 L 157,33" fill="none" stroke="#F5A623" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                
+                <!-- COMPUTER ENGINEERING subtitle text -->
+                <text x="16" y="70" fill="#F5A623" font-family="'Space Grotesk', 'Inter', sans-serif" font-size="10.5" font-weight="800" letter-spacing="0.1em">COMPUTER ENGINEERING</text>
+            </svg>
+        </a>
+        
+        <!-- Navigation Menu -->
+        <nav class="hidden lg:flex items-center gap-1">
+            <a href="index.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/20 transition-all" data-i18n="nav.home">Home</a>
+            <a href="products.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/20 transition-all" data-i18n="nav.products">Products</a>
+            <a href="Services.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/20 transition-all" data-i18n="nav.services">Services</a>
+            <a href="index.html#projects" class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/20 transition-all" data-i18n="nav.projects">Projects</a>
+            <a href="contactus.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/20 transition-all" data-i18n="nav.contact">Contact Us</a>
+        </nav>
+
+        <!-- Right Section -->
+        <div class="hidden lg:flex items-center gap-6">
+            <!-- Contact Info -->
+            <div class="flex items-center gap-4">
+                <div class="flex flex-col leading-tight">
+                    <span class="text-[10px] font-medium text-brand-secondary uppercase tracking-wider" data-i18n="nav.call_us">Call Us</span>
+                    <div class="flex items-center gap-1.5 mt-0.5">
+                        <i class="fa-solid fa-phone text-brand-primary text-xs"></i>
+                        <span class="text-sm font-bold text-brand-secondary">+251 911 639 349</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <a href="contactus.html" class="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-primary to-amber-500 hover:from-amber-500 hover:to-brand-primary text-white font-semibold text-sm shadow-lg shadow-brand-primary/25 transition-all transform hover:scale-105 flex items-center gap-2 cyber-border">
+                <span data-i18n="nav.establish_connection">Establish Connection</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+            <!-- Language Selector -->
+            <select id="language-select" class="bg-brand-card/80 border border-brand-border text-sm rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-brand-primary">
+                <option value="en">English</option>
+                <option value="am">አማርኛ</option>
+            </select>
+
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="lg:hidden text-white hover:text-brand-primary transition-colors focus:outline-none w-11 h-11 rounded-lg bg-brand-card flex items-center justify-center border border-brand-border/40">
+            <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-brand-darker border-t border-brand-border/30 px-6 py-6 flex flex-col gap-3 shadow-2xl transition-all duration-300">
+        <a href="index.html" class="mobile-nav-btn text-left py-2.5 px-4 rounded-lg text-brand-secondary font-medium flex items-center justify-between hover:bg-brand-card/50">
+            <span data-i18n="nav.home">Home</span><i class="fa-solid fa-chevron-right text-xs"></i>
+        </a>
+        <a href="products.html" class="mobile-nav-btn text-left py-2.5 px-4 rounded-lg text-brand-secondary font-medium flex items-center justify-between hover:bg-brand-card/50">
+            <span data-i18n="nav.products">Products</span><i class="fa-solid fa-chevron-right text-xs"></i>
+        </a>
+        <a href="Services.html" class="mobile-nav-btn text-left py-2.5 px-4 rounded-lg text-brand-secondary font-medium flex items-center justify-between hover:bg-brand-card/50">
+            <span data-i18n="nav.services">Services</span><i class="fa-solid fa-chevron-right text-xs"></i>
+        </a>
+        <a href="index.html#projects" class="mobile-nav-btn text-left py-2.5 px-4 rounded-lg text-brand-secondary font-medium flex items-center justify-between hover:bg-brand-card/50">
+            <span data-i18n="nav.projects">Projects</span><i class="fa-solid fa-chevron-right text-xs"></i>
+        </a>
+        <a href="contactus.html" class="mobile-nav-btn text-left py-2.5 px-4 rounded-lg text-brand-secondary font-medium flex items-center justify-between hover:bg-brand-card/50">
+            <span data-i18n="nav.contact">Contact Us</span><i class="fa-solid fa-chevron-right text-xs"></i>
+        </a>
+        <div class="pt-4 border-t border-brand-border/30 flex flex-col gap-3">
+            <a href="tel:+251911639349" class="flex items-center gap-3 py-2 px-4 text-brand-secondary hover:text-brand-primary text-sm">
+                <i class="fa-solid fa-phone text-brand-primary text-lg"></i>
+                <span class="text-sm font-semibold text-white">+251 911 639 349</span>
+            </a>
+            <a href="contactus.html" class="w-full py-3 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-bold rounded-xl flex items-center justify-center gap-2 cyber-border">
+                <i class="fa-solid fa-paper-plane"></i> Transmission Panel
+            </a>
+        </div>
+    </div>
+</header>
+
+    <main class="max-w-7xl mx-auto px-6 py-16 relative">
+        <!-- Hero Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="px-4 py-1.5 rounded-full glass-panel border border-brand-primary/30 text-xs font-semibold uppercase tracking-widest text-brand-primary inline-block mb-4">All Categories</span>
+            <h1 class="text-4xl md:text-5xl font-black tracking-tight text-[#5B8DB8] mb-4">Product Categories</h1>
+            <p class="text-brand-secondary text-base md:text-lg leading-relaxed">Explore our comprehensive range of enterprise-grade surveillance systems, computing solutions, and networking infrastructure.</p>
+        </div>
+
+        <!-- Category Grid Layout -->
+        <div id="category-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            
+            <!-- Category 1: Digital Video Recorders (DVRs) -->
+            <div class="category-card glass-panel rounded-2xl p-6 flex flex-col transition-all duration-300 cursor-pointer border border-brand-primary/20 hover:border-brand-primary/60 group">
+                <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-brand-primary/20 mb-4 group-hover:bg-brand-primary/40 transition-all">
+                    <i class="fa-solid fa-server text-brand-primary text-lg"></i>
+                </div>
+                <h3 class="category-title text-lg font-bold text-white mb-3 tracking-tight">Digital Video Recorders</h3>
+                <p class="text-brand-secondary text-xs leading-relaxed mb-6 flex-grow">HD/UHD surveillance with H.265+/H.265 compression for efficient storage.</p>
+                <button onclick="showDetails('dvr')" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-primary/20 hover:bg-brand-primary/40 text-brand-primary font-semibold text-xs transition-all w-full justify-center">
+                    <span>View Details</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+
+            <!-- Category 2: CCTV Cameras -->
+            <div class="category-card glass-panel rounded-2xl p-6 flex flex-col transition-all duration-300 cursor-pointer border border-brand-primary/20 hover:border-brand-primary/60 group">
+                <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-brand-primary/20 mb-4 group-hover:bg-brand-primary/40 transition-all">
+                    <i class="fa-solid fa-video text-brand-primary text-lg"></i>
+                </div>
+                <h3 class="category-title text-lg font-bold text-white mb-3 tracking-tight">CCTV Cameras</h3>
+                <p class="text-brand-secondary text-xs leading-relaxed mb-6 flex-grow">Multi-sensor panoramic cameras with AI codec and advanced IR capabilities.</p>
+                <button onclick="showDetails('cctv')" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-primary/20 hover:bg-brand-primary/40 text-brand-primary font-semibold text-xs transition-all w-full justify-center">
+                    <span>View Details</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+
+            <!-- Category 3: Computer Accessories -->
+            <div class="category-card glass-panel rounded-2xl p-6 flex flex-col transition-all duration-300 cursor-pointer border border-brand-primary/20 hover:border-brand-primary/60 group">
+                <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-brand-primary/20 mb-4 group-hover:bg-brand-primary/40 transition-all">
+                    <i class="fa-solid fa-keyboard text-brand-primary text-lg"></i>
+                </div>
+                <h3 class="category-title text-lg font-bold text-white mb-3 tracking-tight">Computer Accessories</h3>
+                <p class="text-brand-secondary text-xs leading-relaxed mb-6 flex-grow">Premium peripherals and accessories for workstations and control centers.</p>
+                <button onclick="showDetails('accessories')" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-primary/20 hover:bg-brand-primary/40 text-brand-primary font-semibold text-xs transition-all w-full justify-center">
+                    <span>View Details</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+
+            <!-- Category 4: Servers Accessories -->
+            <div class="category-card glass-panel rounded-2xl p-6 flex flex-col transition-all duration-300 cursor-pointer border border-brand-primary/20 hover:border-brand-primary/60 group">
+                <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-brand-primary/20 mb-4 group-hover:bg-brand-primary/40 transition-all">
+                    <i class="fa-solid fa-network-wired text-brand-primary text-lg"></i>
+                </div>
+                <h3 class="category-title text-lg font-bold text-white mb-3 tracking-tight">Servers Accessories</h3>
+                <p class="text-brand-secondary text-xs leading-relaxed mb-6 flex-grow">Professional server racks, PDUs, and data center infrastructure solutions.</p>
+                <button onclick="showDetails('servers')" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-primary/20 hover:bg-brand-primary/40 text-brand-primary font-semibold text-xs transition-all w-full justify-center">
+                    <span>View Details</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+
+            <!-- Category 5: Laptop Computers -->
+            <div class="category-card glass-panel rounded-2xl p-6 flex flex-col transition-all duration-300 cursor-pointer border border-brand-primary/20 hover:border-brand-primary/60 group">
+                <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-brand-primary/20 mb-4 group-hover:bg-brand-primary/40 transition-all">
+                    <i class="fa-solid fa-laptop text-brand-primary text-lg"></i>
+                </div>
+                <h3 class="category-title text-lg font-bold text-white mb-3 tracking-tight">Laptop Computers</h3>
+                <p class="text-brand-secondary text-xs leading-relaxed mb-6 flex-grow">Dell, HP, and other premium business-class laptop solutions.</p>
+                <button onclick="showDetails('laptops')" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-primary/20 hover:bg-brand-primary/40 text-brand-primary font-semibold text-xs transition-all w-full justify-center">
+                    <span>View Details</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Details Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle" class="text-3xl font-bold text-brand-primary mb-4"></h2>
+            <div id="modalDescription" class="text-brand-secondary leading-relaxed text-base"></div>
+            <div class="mt-6 flex gap-3">
+                <button onclick="closeModal()" class="flex-1 px-4 py-2 rounded-lg border border-brand-primary/40 text-brand-secondary hover:text-white hover:border-brand-primary transition-all">Close</button>
+                <button onclick="navigateToProducts()" class="flex-1 px-4 py-2 rounded-lg bg-brand-primary/20 hover:bg-brand-primary/40 text-brand-primary font-semibold transition-all flex items-center justify-center gap-2">
+                    <span>View All Products</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Area -->
+    <footer class="glass-panel border-t border-white/5 mt-20 py-8 text-center text-xs text-brand-secondary">
+        <p>&copy; 2026 Vibe Computer Engineering PLC. All rights reserved.</p>
+    </footer>
+
+    <!-- Filter & Mobile Menu Logic -->
+    <script>
+        // Mobile Navigation Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Product Details Data
+        const productDetails = {
+            dvr: {
+                title: 'Digital Video Recorders (DVRs)',
+                description: `<strong>System Overview:</strong> With surveillance operators pursuing HD/UHD which further adds the storage and transmission cost, HDCVI H.265+/H.265 has been released to incredibly decrease the required bitrate while maintaining image quality.
+                <br><br><strong>Key Features:</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>• H.265+/H.265 compression technology for efficient storage</li>
+                    <li>• Network and hybrid recording capabilities</li>
+                    <li>• Scalable from 4-channel to 64-channel systems</li>
+                    <li>• Professional 2U rack mounting options</li>
+                    <li>• Enterprise-grade surveillance deployment</li>
+                </ul>
+                <br><strong>Applications:</strong> Suitable for businesses, institutions, and large-scale surveillance operations requiring professional-grade video recording and storage solutions.`
+            },
+            cctv: {
+                title: 'CCTV Cameras',
+                description: `<strong>Overview:</strong> Dahua Technology is committed to offering cutting-edge technologies and products, such as multi-sensor panoramic cameras, ePoE for 800m power and data transmission over Ethernet cable, AI Codec to improve surveillance efficiency.
+                <br><br><strong>Key Features:</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>• Multi-sensor panoramic camera systems</li>
+                    <li>• AI-powered object detection and classification</li>
+                    <li>• ePoE (800m power and data transmission)</li>
+                    <li>• Advanced infrared and low-light capabilities</li>
+                    <li>• PTZ systems with extreme optical zoom</li>
+                </ul>
+                <br><strong>Applications:</strong> Ideal for perimeter protection, area monitoring, traffic surveillance, and intelligent security systems.`
+            },
+            accessories: {
+                title: 'Computer Accessories',
+                description: `<strong>Product Range:</strong> Premium computer accessories and peripherals designed for enterprise workstations and control center environments.
+                <br><br><strong>Key Features:</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>• Professional-grade monitors (Xiaomi Desktop Monitor)</li>
+                    <li>• High-resolution displays for surveillance monitoring</li>
+                    <li>• Ergonomic peripherals and input devices</li>
+                    <li>• Premium cable management solutions</li>
+                    <li>• Workstation accessories for optimal performance</li>
+                </ul>
+                <br><strong>Applications:</strong> Perfect for control rooms, monitoring stations, and enterprise workstations requiring reliable and high-quality accessories.`
+            },
+            servers: {
+                title: 'Servers Accessories',
+                description: `<strong>Infrastructure Solutions:</strong> Professional server and data center infrastructure equipment for enterprise deployments.
+                <br><br><strong>Product Range:</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>• NavePoint 42U Professional Server Racks</li>
+                    <li>• 4-post open frame network relay racks</li>
+                    <li>• Heavy-duty construction with adjustable depths</li>
+                    <li>• Power distribution units (PDUs)</li>
+                    <li>• Cable management systems and accessories</li>
+                </ul>
+                <br><strong>Specifications:</strong> 1000mm depth, casters for mobility, professional-grade materials for long-term reliability.
+                <br><br><strong>Applications:</strong> Data centers, server rooms, network operations centers, and enterprise infrastructure deployments.`
+            },
+            laptops: {
+                title: 'Laptop Computers',
+                description: `<strong>Business-Class Solutions:</strong> Premium laptop computers from leading manufacturers including Dell and HP, fully licensed and enterprise-configured.
+                <br><br><strong>Key Features:</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>• Dell Inspiron and Pavilion series laptops</li>
+                    <li>• Fully licensed operating systems</li>
+                    <li>• Enterprise network integration ready</li>
+                    <li>• Optimized performance for business applications</li>
+                    <li>• Professional build quality and durability</li>
+                </ul>
+                <br><strong>Specifications:</strong> Configured for corporate environments with productivity tools and security features pre-installed.
+                <br><br><strong>Applications:</strong> Corporate offices, educational institutions, and enterprise deployments requiring reliable computing solutions.`
+            }
+        };
+
+        // Show Modal with Details
+        function showDetails(category) {
+            const modal = document.getElementById('detailsModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            if (productDetails[category]) {
+                modalTitle.textContent = productDetails[category].title;
+                modalDescription.innerHTML = productDetails[category].description;
+                modal.classList.add('show');
+            }
+        }
+
+        // Close Modal
+        function closeModal() {
+            const modal = document.getElementById('detailsModal');
+            modal.classList.remove('show');
+        }
+
+        // Navigate to Products Function
+        function navigateToProducts() {
+            window.location.href = 'https://vibecomputer.com/product/categories/';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailsModal');
+            if (event.target == modal) {
+                modal.classList.remove('show');
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+    <!-- Custom Functionality Scripts -->
+    <script src="translations.js"></script>
+    <script src="lang.js"></script>
+</body>
+</html>
