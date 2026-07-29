@@ -7,7 +7,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     
@@ -32,6 +32,7 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         display: ['Syne', 'sans-serif'],
+                        grotesk: ['Space Grotesk', 'sans-serif'],
                     },
                     boxShadow: {
                         'glow': '0 0 20px rgba(245, 166, 35, 0.35)',
@@ -48,23 +49,117 @@
             background-color: #0D0A06;
             color: #E8DCC8;
             overflow-x: hidden;
+            transition: background-color 0.6s ease, color 0.5s ease;
         }
-        .header-font {
-            font-family: 'Syne', sans-serif;
+        
+        /* LIGHT MODE */
+        body.light-mode {
+            background-color: #f5f0eb;
+            color: #1a120a;
         }
-        ::-webkit-scrollbar {
-            width: 8px;
+        body.light-mode .bg-brand-darker { background-color: #f5f0eb; }
+        body.light-mode .bg-brand-darker\/70 { background-color: rgba(245, 240, 235, 0.85); }
+        body.light-mode .bg-brand-darker\/50 { background-color: rgba(245, 240, 235, 0.7); }
+        body.light-mode .bg-brand-card { background-color: #f0ebe5; }
+        body.light-mode .bg-brand-card\/40 { background-color: rgba(240, 235, 229, 0.6); }
+        body.light-mode .bg-brand-card\/60 { background-color: rgba(240, 235, 229, 0.75); }
+        body.light-mode .bg-brand-card\/80 { background-color: rgba(240, 235, 229, 0.85); }
+        body.light-mode .border-brand-border { border-color: #d5cdc4; }
+        body.light-mode .border-brand-border\/30 { border-color: rgba(213, 205, 196, 0.3); }
+        body.light-mode .border-brand-border\/80 { border-color: rgba(213, 205, 196, 0.8); }
+        body.light-mode .text-brand-secondary { color: #4a4a4a; }
+        body.light-mode .text-slate-300 { color: #555; }
+        body.light-mode .has-scanline::after {
+            background: linear-gradient(to bottom, rgba(44,62,80,0) 0%, rgba(44,62,80,0.05) 10%, rgba(44,62,80,0.15) 50%, rgba(44,62,80,0.05) 90%, rgba(44,62,80,0) 100%);
         }
-        ::-webkit-scrollbar-track {
-            background: #0D0A06;
+        body.light-mode .cyber-grid::before {
+            background: linear-gradient(rgba(44,62,80,0.06) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(44,62,80,0.06) 1px, transparent 1px);
         }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, #F5A623, #5B8DB8);
-            border-radius: 10px;
+        body.light-mode .skill-bar { background: rgba(44,62,80,0.15); }
+        body.light-mode .stat-box-animated { background: rgba(240,235,229,0.8) !important; border-color: #d5cdc4 !important; }
+        body.light-mode .equipment-item { background: rgba(240,235,229,0.7); border-color: #d5cdc4; }
+        body.light-mode .equipment-img { background: linear-gradient(45deg, #e8e0d8, #d5cdc4); color: #b8860b; }
+        body.light-mode .equipment-name { color: #b8860b; }
+        body.light-mode .equipment-desc { color: #555; }
+        body.light-mode .service-card { background: rgba(240,235,229,0.6); border-color: #d5cdc4; }
+        body.light-mode .project-card { background: rgba(240,235,229,0.6); border-color: #d5cdc4; }
+        body.light-mode .testimonial-card { background: rgba(240,235,229,0.7); border-color: #d5cdc4; }
+        body.light-mode .hologram-effect::before { background: radial-gradient(circle, rgba(44,62,80,0.08) 0%, transparent 70%); }
+        body.light-mode .bg-brand-secondary\/10 { background-color: rgba(44,62,80,0.08); }
+        body.light-mode .bg-brand-secondary\/5 { background-color: rgba(44,62,80,0.04); }
+        body.light-mode .bg-brand-primary\/20 { background-color: rgba(184,134,11,0.15); }
+        body.light-mode .bg-brand-secondary\/20 { background-color: rgba(44,62,80,0.12); }
+        body.light-mode .bg-brand-accent\/20 { background-color: rgba(184,134,11,0.12); }
+        body.light-mode .text-brand-accent { color: #b8860b; }
+        body.light-mode .cyber-border::before { background: linear-gradient(45deg, #b8860b, #4a6a8a, #b8860b) border-box; }
+        body.light-mode .theme-toggle-btn { background: rgba(240,235,229,0.8); border-color: #d5cdc4; color: #1a120a; }
+        body.light-mode .theme-toggle-btn:hover { border-color: #b8860b; box-shadow: 0 0 20px rgba(184,134,11,0.2); }
+        body.light-mode .hero-shimmer {
+            background: linear-gradient(90deg, #b8860b 0%, #d4a017 30%, #4a6a8a 55%, #b8860b 75%, #d4a017 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerText 4s linear infinite;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, #FFD166, #4A7DA8);
+        body.light-mode #global-bg > div:first-child {
+            background: linear-gradient(135deg, #f5f0eb 0%, #e8e0d8 50%, #f5f0eb 100%) !important;
         }
+        body.light-mode .bg-radial-dots { background-image: radial-gradient(#d5cdc4 1px, transparent 1px); }
+        body.light-mode .particle { background: linear-gradient(45deg, #b8860b, #4a6a8a); box-shadow: 0 0 10px rgba(44,62,80,0.25); }
+        body.light-mode ::-webkit-scrollbar-track { background: #f5f0eb; }
+        body.light-mode header { background: rgba(245,240,235,0.92) !important; border-color: rgba(213,205,196,0.8) !important; backdrop-filter: blur(12px); }
+        body.light-mode header .text-brand-secondary { color: #4a4a4a !important; }
+        body.light-mode header .hover\:text-brand-primary:hover { color: #b8860b !important; }
+        body.light-mode header .bg-brand-card { background: rgba(240,235,229,0.6) !important; }
+        body.light-mode header .border-brand-border { border-color: #d5cdc4 !important; }
+        body.light-mode header .border-brand-border\/40 { border-color: rgba(213,205,196,0.4) !important; }
+        body.light-mode header .bg-brand-card\/80 { background: rgba(240,235,229,0.85) !important; }
+        body.light-mode header select { background: rgba(240,235,229,0.8) !important; border-color: #d5cdc4 !important; color: #1a120a !important; }
+        body.light-mode header .theme-toggle-btn { background: rgba(240,235,229,0.9); border-color: #d5cdc4; color: #1a120a; }
+        body.light-mode header .theme-toggle-btn:hover { border-color: #b8860b; box-shadow: 0 0 20px rgba(184,134,11,0.2); }
+        body.light-mode #mobile-menu { background: #f5f0eb !important; border-color: rgba(213,205,196,0.3) !important; }
+        body.light-mode #mobile-menu .text-white { color: #1a120a !important; }
+        body.light-mode #mobile-menu .text-brand-secondary { color: #4a4a4a !important; }
+        body.light-mode #mobile-menu .border-brand-border\/30 { border-color: rgba(213,205,196,0.3) !important; }
+        body.light-mode #mobile-menu .bg-brand-card { background: rgba(240,235,229,0.6) !important; }
+        body.light-mode #mobile-menu .hover\:bg-brand-card\/50:hover { background: rgba(240,235,229,0.8) !important; }
+        body.light-mode #mobile-menu .bg-gradient-to-r { background: linear-gradient(to right, #b8860b, #4a6a8a) !important; }
+        
+        /* HERO SECTION - always dark */
+        #hero-section {
+            background: #0D0A06 !important;
+            color: #E8DCC8 !important;
+        }
+        #hero-section .bg-brand-card\/80 {
+            background: rgba(30,20,8,0.8) !important;
+            border-color: rgba(61,46,16,0.6) !important;
+        }
+        #hero-section .stat-box-animated {
+            background: rgba(30,20,8,0.5) !important;
+            border-color: rgba(245,166,35,0.2) !important;
+        }
+        #hero-section .text-brand-secondary {
+            color: #5B8DB8 !important;
+        }
+        #hero-section .text-slate-300 {
+            color: #B0BEC5 !important;
+        }
+        #hero-section .border-t {
+            border-color: rgba(61,46,16,0.6) !important;
+        }
+        #hero-section .has-scanline::after {
+            background: linear-gradient(to bottom, rgba(120,144,156,0) 0%, rgba(120,144,156,0.1) 10%, rgba(120,144,156,0.6) 50%, rgba(120,144,156,0.1) 90%, rgba(120,144,156,0) 100%);
+        }
+
+        .header-font { font-family: 'Syne', sans-serif; }
+        .grotesk-font { font-family: 'Space Grotesk', sans-serif; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0D0A06; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #F5A623, #5B8DB8); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(to bottom, #FFD166, #4A7DA8); }
         
         @keyframes scanline {
             0% { transform: translateY(-100%); }
@@ -72,14 +167,7 @@
         }
         .animate-scanline {
             animation: scanline 4s linear infinite;
-            background: linear-gradient(
-                to bottom,
-                rgba(120, 144, 156, 0) 0%,
-                rgba(120, 144, 156, 0.1) 10%,
-                rgba(120, 144, 156, 0.6) 50%,
-                rgba(120, 144, 156, 0.1) 90%,
-                rgba(120, 144, 156, 0) 100%
-            );
+            background: linear-gradient(to bottom, rgba(120,144,156,0) 0%, rgba(120,144,156,0.1) 10%, rgba(120,144,156,0.6) 50%, rgba(120,144,156,0.1) 90%, rgba(120,144,156,0) 100%);
             width: 100%;
             height: 20px;
             position: absolute;
@@ -87,20 +175,7 @@
             mix-blend-mode: overlay;
         }
         
-        .bg-radial-dots {
-            background-image: radial-gradient(#4A1414 1px, transparent 1px);
-            background-size: 24px 24px;
-        }
-
-        /* Card and Box Animation Enhancements */
-        @keyframes boxGlowPulse {
-            0%, 100% {
-                box-shadow: 0 0 15px rgba(245, 166, 35, 0.2), inset 0 0 10px rgba(245, 166, 35, 0.05);
-            }
-            50% {
-                box-shadow: 0 0 25px rgba(91, 141, 184, 0.4), inset 0 0 15px rgba(91, 141, 184, 0.1);
-            }
-        }
+        .bg-radial-dots { background-image: radial-gradient(#4A1414 1px, transparent 1px); background-size: 24px 24px; }
 
         .stat-box-animated {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -114,23 +189,12 @@
         .equipment-item, .testimonial-card, .project-card, .service-card {
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-
         .equipment-item:hover, .testimonial-card:hover, .project-card:hover, .service-card:hover {
             transform: translateY(-12px) scale(1.02);
             box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 166, 35, 0.25);
             border-color: #F5A623 !important;
         }
 
-        .console-item {
-            transition: all 0.3s ease;
-        }
-        .console-item:hover {
-            transform: translateX(6px);
-            border-color: #5B8DB8 !important;
-            background-color: rgba(30, 20, 8, 0.8) !important;
-        }
-
-        /* Hero animated gradient background */
         .hero-bg {
             position: absolute;
             inset: 0;
@@ -140,7 +204,6 @@
             animation: bgGradient 20s ease infinite;
         }
 
-        /* Gradient animation */
         @keyframes bgGradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -152,22 +215,17 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Hero text entrance animation */
         @keyframes heroFadeUp {
             0% { opacity: 0; transform: translateY(40px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-        .hero-animate {
-            opacity: 0;
-            animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
+        .hero-animate { opacity: 0; animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
         .hero-animate-1 { animation-delay: 0.2s; }
         .hero-animate-2 { animation-delay: 0.45s; }
         .hero-animate-3 { animation-delay: 0.65s; }
         .hero-animate-4 { animation-delay: 0.85s; }
         .hero-animate-5 { animation-delay: 1.05s; }
 
-        /* Shimmer sweep on headline */
         @keyframes shimmerText {
             0% { background-position: -200% center; }
             100% { background-position: 200% center; }
@@ -180,37 +238,15 @@
             background-clip: text;
             animation: shimmerText 4s linear infinite;
         }
+
         @keyframes vibeLetterDrop {
-            0% { 
-                opacity: 0;
-                transform: translateY(-60px) scale(0.5);
-                filter: blur(10px);
-            }
-            50% {
-                opacity: 1;
-            }
-            100% { 
-                opacity: 1;
-                transform: translateY(0) scale(1);
-                filter: blur(0);
-            }
+            0% { opacity: 0; transform: translateY(-60px) scale(0.5); filter: blur(10px); }
+            50% { opacity: 1; }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
-
-        @keyframes orbitIntro {
-            0% { opacity: 0; transform: scale(0); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes fadeOutIntro {
-            0% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        @keyframes slideUpContent {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes orbitIntro { 0% { opacity: 0; transform: scale(0); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes fadeOutIntro { 0% { opacity: 1; } 95% { opacity: 1; } 100% { opacity: 0; } }
+        @keyframes slideUpContent { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         #intro-splash {
             position: fixed;
@@ -223,10 +259,7 @@
             justify-content: center;
             animation: fadeOutIntro 3.5s ease-in-out forwards;
         }
-
-        #intro-splash.hidden {
-            display: none;
-        }
+        #intro-splash.hidden { display: none; }
 
         .intro-letter {
             font-family: 'Syne', sans-serif;
@@ -240,7 +273,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         .intro-letter:nth-child(1) { animation-delay: 0.1s; }
         .intro-letter:nth-child(2) { animation-delay: 0.2s; }
         .intro-letter:nth-child(3) { animation-delay: 0.3s; }
@@ -252,25 +284,9 @@
             border: 1px solid rgba(120, 144, 156, 0.2);
             animation: orbitIntro 1.2s ease-out forwards 0.6s;
         }
-
-        .intro-orbit-ring:nth-child(1) { 
-            width: 200px; 
-            height: 200px; 
-            animation-delay: 0.6s;
-            border-color: linear-gradient(to right, rgba(255, 165, 0, 0.3), rgba(120, 144, 156, 0.3));
-        }
-        .intro-orbit-ring:nth-child(2) { 
-            width: 300px; 
-            height: 300px; 
-            animation-delay: 0.8s;
-            border-color: linear-gradient(to right, rgba(255, 165, 0, 0.2), rgba(120, 144, 156, 0.2));
-        }
-        .intro-orbit-ring:nth-child(3) { 
-            width: 400px; 
-            height: 400px; 
-            animation-delay: 1s;
-            border-color: linear-gradient(to right, rgba(255, 165, 0, 0.1), rgba(120, 144, 156, 0.1));
-        }
+        .intro-orbit-ring:nth-child(1) { width: 200px; height: 200px; animation-delay: 0.6s; }
+        .intro-orbit-ring:nth-child(2) { width: 300px; height: 300px; animation-delay: 0.8s; }
+        .intro-orbit-ring:nth-child(3) { width: 400px; height: 400px; animation-delay: 1s; }
 
         .intro-subtitle {
             position: absolute;
@@ -283,13 +299,8 @@
             animation: slideUpContent 0.8s ease-out forwards 1.8s;
         }
 
-        body.intro-active {
-            overflow: hidden;
-        }
-
-        body.intro-complete {
-            overflow: auto;
-        }
+        body.intro-active { overflow: hidden; }
+        body.intro-complete { overflow: auto; }
 
         #network-canvas-container {
             position: absolute;
@@ -297,30 +308,10 @@
             z-index: 0;
             cursor: grab;
         }
-        #network-canvas-container:active {
-            cursor: grabbing;
-        }
-        #network-canvas-container canvas {
-            display: block;
-            width: 100% !important;
-            height: 100% !important;
-        }
+        #network-canvas-container:active { cursor: grabbing; }
+        #network-canvas-container canvas { display: block; width: 100% !important; height: 100% !important; }
         
-        section {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .scanline-wrapper::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
+        section { position: relative; overflow: hidden; }
         
         .has-scanline::after {
             content: "";
@@ -329,14 +320,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                to bottom,
-                rgba(120, 144, 156, 0) 0%,
-                rgba(120, 144, 156, 0.1) 10%,
-                rgba(120, 144, 156, 0.6) 50%,
-                rgba(120, 144, 156, 0.1) 90%,
-                rgba(120, 144, 156, 0) 100%
-            );
+            background: linear-gradient(to bottom, rgba(120,144,156,0) 0%, rgba(120,144,156,0.1) 10%, rgba(120,144,156,0.6) 50%, rgba(120,144,156,0.1) 90%, rgba(120,144,156,0) 100%);
             animation: scanline 8s linear infinite;
             mix-blend-mode: overlay;
             pointer-events: none;
@@ -350,9 +334,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                linear-gradient(rgba(120, 144, 156, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(120, 144, 156, 0.05) 1px, transparent 1px);
+            background: linear-gradient(rgba(120,144,156,0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(120,144,156,0.05) 1px, transparent 1px);
             background-size: 30px 30px;
             pointer-events: none;
             z-index: -1;
@@ -361,7 +344,6 @@
         .cyber-border {
             position: relative;
         }
-        
         .cyber-border::before {
             content: "";
             position: absolute;
@@ -377,175 +359,10 @@
             z-index: -1;
             animation: borderAnimation 3s linear infinite;
         }
+        @keyframes borderAnimation { 0% { background-position: 0 0; } 100% { background-position: 100% 100%; } }
         
-        @keyframes borderAnimation {
-            0% { background-position: 0 0; }
-            100% { background-position: 100% 100%; }
-        }
-        
-        .glitch-effect {
-            position: relative;
-        }
-        
-        .glitch-effect::before,
-        .glitch-effect::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .glitch-effect::before {
-            left: 2px;
-            text-shadow: -2px 0 #78909C;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim 5s infinite linear alternate-reverse;
-        }
-        
-        .glitch-effect::after {
-            left: -2px;
-            text-shadow: -2px 0 #FFA500;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim2 5s infinite linear alternate-reverse;
-        }
-        
-        @keyframes glitch-anim {
-            0% { clip: rect(42px, 9999px, 44px, 0); }
-            5% { clip: rect(12px, 9999px, 59px, 0); }
-            10% { clip: rect(48px, 9999px, 29px, 0); }
-            15% { clip: rect(42px, 9999px, 73px, 0); }
-            20% { clip: rect(63px, 9999px, 27px, 0); }
-            25% { clip: rect(34px, 9999px, 55px, 0); }
-            30% { clip: rect(86px, 9999px, 73px, 0); }
-            35% { clip: rect(20px, 9999px, 20px, 0); }
-            40% { clip: rect(26px, 9999px, 60px, 0); }
-            45% { clip: rect(25px, 9999px, 66px, 0); }
-            50% { clip: rect(57px, 9999px, 98px, 0); }
-            55% { clip: rect(5px, 9999px, 46px, 0); }
-            60% { clip: rect(82px, 9999px, 31px, 0); }
-            65% { clip: rect(54px, 9999px, 27px, 0); }
-            70% { clip: rect(28px, 9999px, 99px, 0); }
-            75% { clip: rect(45px, 9999px, 69px, 0); }
-            80% { clip: rect(23px, 9999px, 85px, 0); }
-            85% { clip: rect(54px, 9999px, 84px, 0); }
-            90% { clip: rect(45px, 9999px, 47px, 0); }
-            95% { clip: rect(37px, 9999px, 20px, 0); }
-            100% { clip: rect(73px, 9999px, 99px, 0); }
-        }
-        
-        @keyframes glitch-anim2 {
-            0% { clip: rect(65px, 9999px, 100px, 0); }
-            5% { clip: rect(52px, 9999px, 74px, 0); }
-            10% { clip: rect(79px, 9999px, 85px, 0); }
-            15% { clip: rect(75px, 9999px, 5px, 0); }
-            20% { clip: rect(67px, 9999px, 61px, 0); }
-            25% { clip: rect(14px, 9999px, 79px, 0); }
-            30% { clip: rect(1px, 9999px, 66px, 0); }
-            35% { clip: rect(86px, 9999px, 30px, 0); }
-            40% { clip: rect(23px, 9999px, 98px, 0); }
-            45% { clip: rect(85px, 9999px, 72px, 0); }
-            50% { clip: rect(71px, 9999px, 75px, 0); }
-            55% { clip: rect(2px, 9999px, 48px, 0); }
-            60% { clip: rect(30px, 9999px, 16px, 0); }
-            65% { clip: rect(59px, 9999px, 50px, 0); }
-            70% { clip: rect(41px, 9999px, 62px, 0); }
-            75% { clip: rect(2px, 9999px, 82px, 0); }
-            80% { clip: rect(47px, 9999px, 73px, 0); }
-            85% { clip: rect(3px, 9999px, 27px, 0); }
-            90% { clip: rect(26px, 9999px, 55px, 0); }
-            95% { clip: rect(42px, 9999px, 97px, 0); }
-            100% { clip: rect(38px, 9999px, 49px, 0); }
-        }
-        
-        .matrix-bg {
-            background-image: none;
-        }
-        
-        .terminal-text {
-            font-family: 'Courier New', monospace;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .terminal-text::after {
-            content: "|";
-            animation: blink 1s infinite;
-            margin-left: 5px;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        
-        .pulse-ring {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 2px solid rgba(120, 144, 156, 0.5);
-            animation: pulse 3s infinite;
-        }
-        
-        .pulse-ring:nth-child(2) {
-            animation-delay: 1s;
-        }
-        
-        .pulse-ring:nth-child(3) {
-            animation-delay: 2s;
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(0.8);
-                opacity: 0.8;
-            }
-            100% {
-                transform: scale(1.8);
-                opacity: 0;
-            }
-        }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .parallax-move {
-            transform: translateZ(0);
-            transition: transform 0.1s ease-out;
-        }
-        
-        .hologram-effect {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hologram-effect::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(120, 144, 156, 0.2) 0%, transparent 70%);
-            transform: rotate(30deg);
-            z-index: 1;
-            pointer-events: none;
-            animation: hologramScan 4s linear infinite;
-        }
-        
-        @keyframes hologramScan {
-            0% { transform: rotate(30deg) translateX(-100%); }
-            100% { transform: rotate(30deg) translateX(100%); }
-        }
+        .floating { animation: floating 3s ease-in-out infinite; }
+        @keyframes floating { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
         
         .particle-field {
             position: absolute;
@@ -556,7 +373,6 @@
             z-index: -1;
             overflow: hidden;
         }
-        
         .particle {
             position: absolute;
             border-radius: 50%;
@@ -565,20 +381,7 @@
             animation: particleFloat linear infinite;
             transition: opacity 0.3s ease, background-color 0.3s ease;
         }
-        
-        @keyframes particleFloat {
-            to {
-                transform: translateY(-100px);
-            }
-        }
-        
-        .text-brand-accent {
-            color: #FFCC00;
-        }
-        
-        .text-brand-secondary {
-            color: #546E7A;
-        }
+        @keyframes particleFloat { to { transform: translateY(-100px); } }
         
         .skill-bar {
             height: 8px;
@@ -587,7 +390,6 @@
             overflow: hidden;
             position: relative;
         }
-        
         .skill-level {
             height: 100%;
             background: linear-gradient(90deg, #FFA500, #78909C);
@@ -602,24 +404,11 @@
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
         }
+        .testimonial-carousel::-webkit-scrollbar { display: none; }
+        .testimonial-card { scroll-snap-align: start; flex: 0 0 auto; width: 100%; }
         
-        .testimonial-carousel::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .testimonial-card {
-            scroll-snap-align: start;
-            flex: 0 0 auto;
-            width: 100%;
-        }
-        
-        .service-icon {
-            transition: transform 0.3s ease;
-        }
-        
-        .service-card:hover .service-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
+        .service-icon { transition: transform 0.3s ease; }
+        .service-card:hover .service-icon { transform: scale(1.1) rotate(5deg); }
         
         .equipment-gallery {
             display: grid;
@@ -627,14 +416,12 @@
             gap: 1.5rem;
             margin-top: 2rem;
         }
-        
         .equipment-item {
             background: rgba(42, 10, 10, 0.7);
             border: 1px solid #4A1414;
             border-radius: 0.75rem;
             overflow: hidden;
         }
-        
         .equipment-img {
             width: 100%;
             height: 180px;
@@ -646,39 +433,129 @@
             color: #FFA500;
             font-size: 3rem;
         }
-        
-        .equipment-info {
-            padding: 1.25rem;
-        }
-        
-        .equipment-name {
-            font-weight: 700;
-            color: #FFA500;
-            margin-bottom: 0.5rem;
-        }
-        
-        .equipment-desc {
-            font-size: 0.875rem;
-            color: #B0BEC5;
-            line-height: 1.5;
-        }
+        .equipment-info { padding: 1.25rem; }
+        .equipment-name { font-weight: 700; color: #FFA500; margin-bottom: 0.5rem; }
+        .equipment-desc { font-size: 0.875rem; color: #B0BEC5; line-height: 1.5; }
 
-        .logo-container:hover .logo-svg {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.45));
-        }
+        .logo-container:hover .logo-svg { transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.45)); }
         .logo-container .logo-symbol {
             transform-origin: 152px 33px;
             transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .logo-container:hover .logo-symbol {
-            transform: rotate(15deg);
+        .logo-container:hover .logo-symbol { transform: rotate(15deg); }
+
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(30,20,8,0.6);
+            border: 1px solid rgba(61,46,16,0.4);
+            color: #E8DCC8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            backdrop-filter: blur(8px);
+        }
+        .theme-toggle-btn:hover {
+            border-color: #F5A623;
+            box-shadow: 0 0 20px rgba(245,166,35,0.2);
+            transform: scale(1.05);
+        }
+
+        /* Section divider curves */
+        .section-divider {
+            position: relative;
+            height: 80px;
+            overflow: hidden;
+            margin-top: -2px;
+            z-index: 5;
+        }
+        .section-divider svg {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+            display: block;
+        }
+        .section-divider .curve-fill-top {
+            fill: #0D0A06;
+        }
+        .section-divider .curve-fill-bottom {
+            fill: #f5f0eb;
+        }
+        body.light-mode .section-divider .curve-fill-top {
+            fill: #0D0A06;
+        }
+        body.light-mode .section-divider .curve-fill-bottom {
+            fill: #f5f0eb;
+        }
+
+        .hologram-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .hologram-effect::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(120, 144, 156, 0.15) 0%, transparent 70%);
+            transform: rotate(30deg);
+            z-index: 1;
+            pointer-events: none;
+            animation: hologramScan 4s linear infinite;
+        }
+        @keyframes hologramScan {
+            0% { transform: rotate(30deg) translateX(-100%); }
+            100% { transform: rotate(30deg) translateX(100%); }
+        }
+
+        .section-transition {
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Evangadi-style font for hero heading */
+        .evangadi-heading {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .evangadi-heading .welcome-sub {
+            font-size: 0.45em;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            background: linear-gradient(135deg, #F5A623, #FFD166, #5B8DB8, #F5A623);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerText 4s linear infinite;
+        }
+        .evangadi-heading .main-title {
+            font-weight: 800;
+            letter-spacing: 0.02em;
+        }
+        /* Ensure light mode also uses the same gradient for sub */
+        body.light-mode .evangadi-heading .welcome-sub {
+            background: linear-gradient(135deg, #b8860b, #d4a017, #4a6a8a, #b8860b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerText 4s linear infinite;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-brand-primary selection:text-white intro-active">
 
-    <!-- === GLOBAL FULL-PAGE BACKGROUND ANIMATIONS === -->
+    <!-- GLOBAL BACKGROUND -->
     <div id="global-bg" style="position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:0; pointer-events:none; overflow:hidden;">
         <div style="position:absolute; inset:0; background:linear-gradient(135deg,#0D0A06 0%,#1E1408 50%,#0D0A06 100%); background-size:300% 300%; animation:bgGradient 14s ease infinite;"></div>
         <div style="position:absolute; top:5%; right:-30%; width:240vmax; height:240vmax; transform:translate(0, -5%); opacity:0.55; filter:blur(0.5px);">
@@ -691,15 +568,14 @@
         <div style="position:absolute; inset:0; background:radial-gradient(ellipse at top right, rgba(245,166,35,0.18) 0%, rgba(10,0,0,0.0) 35%, rgba(10,0,0,0.75) 100%);"></div>
     </div>
 
-    <!-- Particle Field Background with Mouse Detection -->
+    <!-- Particle Field -->
     <div class="particle-field" id="particle-field"></div>
 
-    <!-- INTRO SPLASH SCREEN -->
+    <!-- INTRO SPLASH -->
     <div id="intro-splash">
         <div class="intro-orbit-ring"></div>
         <div class="intro-orbit-ring"></div>
         <div class="intro-orbit-ring"></div>
-
         <div class="flex justify-center items-center" style="animation: vibeLetterDrop 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-delay: 0.2s; opacity: 0; filter: blur(10px); transform: translateY(-60px) scale(0.5);">
             <svg class="h-32 sm:h-48 md:h-64 w-auto" viewBox="10 5 175 75" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 20px rgba(255,165,0,0.5));">
                 <g stroke="#FFA500" stroke-width="10.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
@@ -718,14 +594,12 @@
                 <text x="16" y="70" fill="#FFA500" font-family="'Space Grotesk', 'Inter', sans-serif" font-size="10.5" font-weight="800" letter-spacing="0.1em">COMPUTER ENGINEERING</text>
             </svg>
         </div>
-
-        <div class="intro-subtitle">
-            Computer Engineering • Addis Ababa, Ethiopia
-        </div>
+        
     </div>
 
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full font-sans"></div>
 
+    <!-- HEADER -->
     <header class="sticky top-0 z-50 w-full bg-brand-darker/90 backdrop-blur-md border-b border-brand-border/80 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="flex items-center group logo-container">
@@ -737,14 +611,12 @@
                         <path d="M 93,35 H 118 A 13.5,13.5 0 1,0 105,49" />
                     </g>
                     <circle cx="53" cy="17" r="5.25" fill="#FFA500" />
-                    
                     <g class="logo-symbol" stroke="#E2E8F0" stroke-width="2.2" fill="none" opacity="0.9">
                         <rect x="-9.5" y="-9.5" width="19" height="19" rx="4" ry="4" transform="translate(152, 23) rotate(45)" />
                         <rect x="-9.5" y="-9.5" width="19" height="19" rx="4" ry="4" transform="translate(139, 42) rotate(45)" />
                         <rect x="-9.5" y="-9.5" width="19" height="19" rx="4" ry="4" transform="translate(165, 42) rotate(45)" />
                     </g>
                     <path class="logo-symbol" d="M 147,33 L 152,38 L 157,33" fill="none" stroke="#FFA500" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
-                    
                     <text x="16" y="70" fill="#FFA500" font-family="'Space Grotesk', 'Inter', sans-serif" font-size="10.5" font-weight="800" letter-spacing="0.1em">COMPUTER ENGINEERING</text>
                 </svg>
             </a>
@@ -753,14 +625,14 @@
                 <a href="index.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/20 transition-all" data-i18n="nav.home">Home</a>
                 <a href="products.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/20 transition-all" data-i18n="nav.products">Products</a>
                 <a href="Services.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/20 transition-all" data-i18n="nav.services">Services</a>
-                <a href="index.html#projects" class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/20 transition-all" data-i18n="nav.projects">Projects</a>
+                <a href="projects.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/20 transition-all" data-i18n="nav.projects">Projects</a>
                 <a href="contactus.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/20 transition-all" data-i18n="nav.contact">Contact Us</a>
             </nav>
 
-            <div class="hidden lg:flex items-center gap-6">
-                <div class="flex items-center gap-4">
+            <div class="hidden lg:flex items-center gap-4">
+                <div class="flex items-center gap-3">
                     <div class="flex flex-col leading-tight">
-                    <span class="text-[10px] font-medium text-brand-secondary uppercase tracking-wider" data-i18n="nav.call_us">Call Us</span>
+                        <span class="text-[10px] font-medium text-brand-secondary uppercase tracking-wider" data-i18n="nav.call_us">Call Us</span>
                         <div class="flex items-center gap-1.5 mt-0.5">
                             <i class="fa-solid fa-phone text-brand-primary text-xs"></i> 
                             <span class="text-sm font-bold text-brand-secondary">+251 911 639 349</span>
@@ -768,13 +640,13 @@
                     </div>
                 </div>
 
-                <a href="contactus.html" class="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-primary to-amber-500 hover:from-amber-500 hover:to-brand-primary text-white font-semibold text-sm shadow-lg shadow-brand-primary/25 transition-all transform hover:scale-105 flex items-center gap-2 cyber-border">
-                    <span data-i18n="nav.establish_connection">Establish Connection</span>
-                    <i class="fa-solid fa-arrow-right text-xs"></i>
-                </a>
-                <select id="language-select" class="bg-brand-card/80 border border-brand-border text-sm rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-brand-primary">
-                    <option value="en">English</option>
-                    <option value="am">አማርኛ</option>
+                <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Theme">
+                    <i class="fa-solid fa-moon" id="theme-icon-header"></i>
+                </button>
+
+                <select id="language-select" class="bg-brand-card/80 border border-brand-border text-sm rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-brand-primary text-brand-secondary">
+                    <option value="en">EN</option>
+                    <option value="am">አማ</option>
                 </select>
             </div>
 
@@ -783,6 +655,7 @@
             </button>
         </div>
 
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden lg:hidden bg-brand-darker border-t border-brand-border/30 px-6 py-6 flex flex-col gap-3 shadow-2xl transition-all duration-300">
             <a href="index.html" class="mobile-nav-btn text-left py-2.5 px-4 rounded-lg text-brand-secondary font-medium flex items-center justify-between hover:bg-brand-card/50">
                 <span data-i18n="nav.home">Home</span><i class="fa-solid fa-chevron-right text-xs"></i>
@@ -800,6 +673,13 @@
                 <span data-i18n="nav.contact">Contact Us</span><i class="fa-solid fa-chevron-right text-xs"></i>
             </a>
             <div class="pt-4 border-t border-brand-border/30 flex flex-col gap-3">
+                <div class="flex items-center justify-between px-4 py-2">
+                    <span class="text-sm text-brand-secondary">Theme</span>
+                    <button id="mobile-theme-toggle" class="text-sm text-brand-secondary hover:text-brand-primary transition-colors px-3 py-1 rounded-lg border border-brand-border/30">
+                        <i class="fa-solid fa-moon" id="mobile-theme-icon"></i>
+                        <span id="mobile-theme-label" class="ml-2">Dark</span>
+                    </button>
+                </div>
                 <a href="tel:+251911639349" class="flex items-center gap-3 py-2 px-4 text-brand-secondary hover:text-brand-primary text-sm">
                     <i class="fa-solid fa-phone text-brand-primary text-lg"></i>
                     <span class="text-sm font-semibold text-white">+251 911 639 349</span>
@@ -813,7 +693,8 @@
 
     <main class="flex-grow">
         <div id="page-home" class="page-container block">
-            <section class="relative min-h-screen flex overflow-hidden has-scanline pt-0">
+            <!-- HERO SECTION - Always Dark -->
+            <section id="hero-section" class="relative min-h-screen flex overflow-hidden has-scanline pt-0">
                 <div id="network-canvas-container"></div>
                 <div class="absolute inset-0 z-10 pointer-events-none" style="background:rgba(13,10,6,0.45);"></div>
 
@@ -824,9 +705,10 @@
                             <span class="text-xs font-bold uppercase tracking-widest text-brand-secondary" data-i18n="hero.telemetry">Telemetry Online &amp; Secured</span>
                         </div>
 
-                        <h1 class="hero-animate hero-animate-2 text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-tight header-font">
-                            <span class="block drop-shadow-lg mb-1 welcome-animate" style="font-size:0.55em; letter-spacing:0.15em; font-weight:600; color:#F5A623;" data-i18n="hero.welcome">Welcome to</span>
-                            <span class="hero-shimmer">VIBE COMPUTER ENGINEERING</span>
+                        <!-- Evangadi-style heading -->
+                        <h1 class="hero-animate hero-animate-2 text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-tight evangadi-heading">
+                            <span class="block drop-shadow-lg mb-3 welcome-sub" data-i18n="hero.welcome">Welcome to</span>
+                            <span class="hero-shimmer main-title">VIBE COMPUTER ENGINEERING</span>
                         </h1>
 
                         <p class="hero-animate hero-animate-4 text-base sm:text-lg max-w-2xl leading-relaxed font-light mt-6 mb-8" style="color:#B0BEC5;" data-i18n="hero.subtitle">
@@ -842,7 +724,7 @@
                             </a>
                         </div>
 
-                        <!-- Animated Stat Boxes -->
+                        <!-- Stat Boxes -->
                         <div class="hero-animate hero-animate-5 grid grid-cols-3 gap-4 mt-10 pt-6 border-t w-full max-w-md" style="border-color:rgba(61,46,16,0.6);">
                             <div class="stat-box-animated p-4 rounded-xl text-center" style="background:rgba(30,20,8,0.5);border:1px solid rgba(245,166,35,0.2);backdrop-filter:blur(8px);">
                                 <h4 class="text-2xl font-black header-font" style="color:#F5A623;">100%</h4>
@@ -862,12 +744,19 @@
                             <i class="fa-solid fa-chevron-down animate-bounce" style="color:#F5A623;"></i>
                             <span>Scroll to explore</span>
                         </div>
-
                     </div>
                 </div>
             </section>
 
-            <section class="py-20 bg-brand-darker/70 relative border-t border-brand-border has-scanline cyber-grid">
+            <!-- Section Divider: Dark to Light Curve -->
+            <div class="section-divider">
+                <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+                    <path class="curve-fill-top" d="M0,80 L1440,80 L1440,0 C1200,60 800,70 0,40 Z"/>
+                </svg>
+            </div>
+
+            <!-- EXPERTISE SECTION - Light Mode -->
+            <section class="py-20 bg-brand-darker/70 relative border-t border-brand-border has-scanline cyber-grid section-transition">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-2xl mx-auto mb-16">
                         <h2 class="text-xs uppercase tracking-widest text-[#5B8DB8] font-bold">Our Expertise</h2>
@@ -886,7 +775,6 @@
                                     <div class="skill-level" data-width="95"></div>
                                 </div>
                             </div>
-                            
                             <div>
                                 <div class="flex justify-between mb-2">
                                     <span class="text-brand-secondary font-medium">Security Implementation</span>
@@ -896,7 +784,6 @@
                                     <div class="skill-level" data-width="92"></div>
                                 </div>
                             </div>
-                            
                             <div>
                                 <div class="flex justify-between mb-2">
                                     <span class="text-brand-secondary font-medium">System Integration</span>
@@ -907,7 +794,6 @@
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="space-y-6">
                             <div>
                                 <div class="flex justify-between mb-2">
@@ -918,7 +804,6 @@
                                     <div class="skill-level" data-width="90"></div>
                                 </div>
                             </div>
-                            
                             <div>
                                 <div class="flex justify-between mb-2">
                                     <span class="text-brand-secondary font-medium">Software Licensing</span>
@@ -928,7 +813,6 @@
                                     <div class="skill-level" data-width="100"></div>
                                 </div>
                             </div>
-                            
                             <div>
                                 <div class="flex justify-between mb-2">
                                     <span class="text-brand-secondary font-medium">Technical Training</span>
@@ -943,8 +827,8 @@
                 </div>
             </section>
 
-            <!-- Equipment Section with Animated Cards -->
-            <section class="py-20 relative overflow-hidden bg-brand-darker/50 border-t border-brand-border">
+            <!-- Equipment Section - Light Mode -->
+            <section class="py-20 relative overflow-hidden bg-brand-darker/50 border-t border-brand-border section-transition">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-2xl mx-auto mb-16">
                         <h2 class="text-xs uppercase tracking-widest text-[#5B8DB8] font-bold">Equipment Portfolio</h2>
@@ -962,7 +846,6 @@
                                 <p class="equipment-desc">High-performance rack servers with redundant power supplies and enterprise SSD storage for mission-critical applications.</p>
                             </div>
                         </div>
-                        
                         <div class="equipment-item cyber-border">
                             <div class="equipment-img">
                                 <i class="fa-solid fa-laptop transition-transform duration-300 group-hover:scale-110"></i>
@@ -972,7 +855,6 @@
                                 <p class="equipment-desc">Professional-grade laptops with certified Windows licenses for engineering applications and secure remote access.</p>
                             </div>
                         </div>
-                        
                         <div class="equipment-item cyber-border">
                             <div class="equipment-img">
                                 <i class="fa-solid fa-video transition-transform duration-300 group-hover:scale-110"></i>
@@ -982,7 +864,6 @@
                                 <p class="equipment-desc">4K resolution CCTV cameras with night vision and intelligent motion detection for comprehensive security coverage.</p>
                             </div>
                         </div>
-                        
                         <div class="equipment-item cyber-border">
                             <div class="equipment-img">
                                 <i class="fa-solid fa-network-wired transition-transform duration-300 group-hover:scale-110"></i>
@@ -996,8 +877,8 @@
                 </div>
             </section>
 
-            <!-- Testimonials with Animated Cards -->
-            <section class="py-20 relative overflow-hidden bg-brand-darker/50 border-t border-brand-border">
+            <!-- Testimonials - Light Mode -->
+            <section class="py-20 relative overflow-hidden bg-brand-darker/50 border-t border-brand-border section-transition">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-2xl mx-auto mb-16">
                         <h2 class="text-xs uppercase tracking-widest text-[#5B8DB8] font-bold">Client Feedback</h2>
@@ -1016,14 +897,9 @@
                             </div>
                             <p class="text-brand-secondary italic mb-6">"Vibe Engineering transformed our entire campus network infrastructure. Their team deployed a robust fiber optic backbone that handles our 15,000+ users seamlessly. The security implementation exceeded our expectations."</p>
                             <div class="flex text-brand-accent">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </div>
                         </div>
-                        
                         <div class="testimonial-card p-8 bg-brand-card/60 rounded-2xl border border-brand-border mr-6 cyber-border">
                             <div class="flex items-center mb-6">
                                 <div class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-primary to-brand-secondary mr-4 shadow-lg"></div>
@@ -1034,14 +910,9 @@
                             </div>
                             <p class="text-brand-secondary italic mb-6">"Working with Vibe Engineering on our data center expansion was exceptional. They designed a fault-tolerant solution with 99.99% uptime capabilities. Their expertise in high-density server configurations saved us significant operational costs."</p>
                             <div class="flex text-brand-accent">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </div>
                         </div>
-                        
                         <div class="testimonial-card p-8 bg-brand-card/60 rounded-2xl border border-brand-border mr-6 cyber-border">
                             <div class="flex items-center mb-6">
                                 <div class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-primary to-brand-secondary mr-4 shadow-lg"></div>
@@ -1052,19 +923,15 @@
                             </div>
                             <p class="text-brand-secondary italic mb-6">"After implementing Vibe's biometric security system and enterprise CCTV network, we've achieved zero security breaches for over two years. Their technical training program empowered our IT staff to maintain the systems effectively."</p>
                             <div class="flex text-brand-accent">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Projects Section with Animated Cards -->
-            <section class="py-20 bg-brand-darker/70 relative border-t border-brand-border has-scanline cyber-grid">
+            <!-- Projects - Light Mode -->
+            <section class="py-20 bg-brand-darker/70 relative border-t border-brand-border has-scanline cyber-grid section-transition">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-2xl mx-auto mb-16">
                         <h2 class="text-xs uppercase tracking-widest text-[#5B8DB8] font-bold">Recent Projects</h2>
@@ -1087,7 +954,6 @@
                                 <span class="px-3 py-1 bg-brand-accent/20 text-brand-accent text-xs rounded-full">Training</span>
                             </div>
                         </div>
-                        
                         <div class="project-card bg-brand-card/40 rounded-2xl border border-brand-border p-6 cyber-border hologram-effect">
                             <div class="mb-4">
                                 <div class="w-full h-48 rounded-lg bg-gradient-to-br from-brand-dark to-brand-secondary flex items-center justify-center">
@@ -1102,7 +968,6 @@
                                 <span class="px-3 py-1 bg-brand-accent/20 text-brand-accent text-xs rounded-full">Monitoring</span>
                             </div>
                         </div>
-                        
                         <div class="project-card bg-brand-card/40 rounded-2xl border border-brand-border p-6 cyber-border hologram-effect">
                             <div class="mb-4">
                                 <div class="w-full h-48 rounded-lg bg-gradient-to-br from-brand-secondary to-brand-primary flex items-center justify-center">
@@ -1118,7 +983,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="text-center mt-12">
                         <button onclick="switchPage('projects')" class="px-6 py-3 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-bold rounded-xl shadow-lg hover:shadow-brand-secondary/30 hover:-translate-y-0.5 transition-all duration-300 cyber-border">
                             View All Projects <i class="fa-solid fa-arrow-right ml-2"></i>
@@ -1126,7 +990,9 @@
                     </div>
                 </div>
             </section>
-            <section class="py-16 bg-brand-darker/70 relative border-t border-brand-border has-scanline cyber-grid">
+
+            <!-- Partners - Light Mode -->
+            <section class="py-16 bg-brand-darker/70 relative border-t border-brand-border has-scanline cyber-grid section-transition">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <p class="text-center text-xs text-brand-secondary tracking-widest uppercase font-bold mb-8">Global Engineering and Hardware Standards Ecosystem</p>
                     <div class="grid grid-cols-2 md:grid-cols-5 gap-6 items-center justify-items-center opacity-60">
@@ -1154,9 +1020,8 @@
                 </div>
             </section>
 
-
-            <!-- Services Section with Animated Cards -->
-            <section class="py-20 relative border-t border-brand-border has-scanline">
+            <!-- Services - Light Mode -->
+            <section class="py-20 relative border-t border-brand-border has-scanline section-transition">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-2xl mx-auto mb-16">
                         <h2 class="text-xs uppercase tracking-widest text-[#5B8DB8] font-bold">Our Services</h2>
@@ -1173,21 +1038,11 @@
                             <h4 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary header-font mb-3">Enterprise Security</h4>
                             <p class="text-brand-secondary text-sm leading-relaxed font-light mb-4">Advanced physical and digital security solutions including CCTV networks, access control, and intrusion detection systems.</p>
                             <ul class="text-brand-secondary text-xs space-y-2">
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i>
-                                    <span>Custom security architecture design</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i>
-                                    <span>24/7 monitoring and support</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i>
-                                    <span>Compliance consulting</span>
-                                </li>
+                                <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i><span>Custom security architecture design</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i><span>24/7 monitoring and support</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i><span>Compliance consulting</span></li>
                             </ul>
                         </div>
-                        
                         <div class="service-card p-8 bg-brand-card/40 rounded-2xl border border-brand-border hover:border-brand-secondary/60 group shadow-card relative overflow-hidden cyber-border hologram-effect">
                             <div class="absolute top-0 right-0 w-24 h-24 bg-brand-secondary/5 rounded-full blur-2xl pointer-events-none"></div>
                             <div class="w-14 h-14 rounded-xl bg-brand-secondary/10 flex items-center justify-center text-brand-secondary mb-6 group-hover:bg-brand-secondary group-hover:text-white transition-all duration-300 cyber-border service-icon">
@@ -1196,21 +1051,11 @@
                             <h4 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary header-font mb-3">Network Infrastructure</h4>
                             <p class="text-brand-secondary text-sm leading-relaxed font-light mb-4">Scalable networking solutions from LAN/WAN setup to SD-WAN implementation with optimal performance and security.</p>
                             <ul class="text-brand-secondary text-xs space-y-2">
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i>
-                                    <span>Fiber optic installations</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i>
-                                    <span>Wireless network optimization</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i>
-                                    <span>Network security implementation</span>
-                                </li>
+                                <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i><span>Fiber optic installations</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i><span>Wireless network optimization</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i><span>Network security implementation</span></li>
                             </ul>
                         </div>
-                        
                         <div class="service-card p-8 bg-brand-card/40 rounded-2xl border border-brand-border hover:border-brand-secondary/60 group shadow-card relative overflow-hidden cyber-border hologram-effect">
                             <div class="absolute top-0 right-0 w-24 h-24 bg-brand-secondary/5 rounded-full blur-2xl pointer-events-none"></div>
                             <div class="w-14 h-14 rounded-xl bg-brand-secondary/10 flex items-center justify-center text-brand-secondary mb-6 group-hover:bg-brand-secondary group-hover:text-white transition-all duration-300 cyber-border service-icon">
@@ -1219,31 +1064,18 @@
                             <h4 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary header-font mb-3">Technical Training</h4>
                             <p class="text-brand-secondary text-sm leading-relaxed font-light mb-4">Industry-standard training programs covering cybersecurity, network administration, and system troubleshooting.</p>
                             <ul class="text-brand-secondary text-xs space-y-2">
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i>
-                                    <span>Certification preparation courses</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i>
-                                    <span>Hands-on lab sessions</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i>
-                                    <span>Customized corporate workshops</span>
-                                </li>
+                                <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i><span>Certification preparation courses</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i><span>Hands-on lab sessions</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-primary mt-1 mr-2"></i><span>Customized corporate workshops</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <!-- Partners Grid Section -->
-            
-            <!-- Console Section with Interactive Boxes -->
-            
         </div>
     </main>
 
+    <!-- FOOTER -->
     <footer class="bg-brand-darker border-t border-brand-border py-12 relative z-10 has-scanline cyber-grid">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
             <div class="text-center md:text-left space-y-2">
@@ -1284,6 +1116,44 @@
     </footer>
 
     <script>
+        // ========== THEME TOGGLE ==========
+        (function() {
+            const themeBtn = document.getElementById('theme-toggle-btn');
+            const themeIcon = document.getElementById('theme-icon-header');
+            const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+            const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+            const mobileThemeLabel = document.getElementById('mobile-theme-label');
+
+            function setTheme(isLight) {
+                if (isLight) {
+                    document.body.classList.add('light-mode');
+                    if (themeIcon) themeIcon.className = 'fa-solid fa-sun';
+                    if (mobileThemeIcon) mobileThemeIcon.className = 'fa-solid fa-sun';
+                    if (mobileThemeLabel) mobileThemeLabel.textContent = 'Light';
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.body.classList.remove('light-mode');
+                    if (themeIcon) themeIcon.className = 'fa-solid fa-moon';
+                    if (mobileThemeIcon) mobileThemeIcon.className = 'fa-solid fa-moon';
+                    if (mobileThemeLabel) mobileThemeLabel.textContent = 'Dark';
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+
+            function toggleTheme() {
+                const isLight = document.body.classList.contains('light-mode');
+                setTheme(!isLight);
+            }
+
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light') setTheme(true);
+            else setTheme(false);
+
+            if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+            if (mobileThemeBtn) mobileThemeBtn.addEventListener('click', toggleTheme);
+        })();
+
+        // ========== INTRO SPLASH ==========
         window.addEventListener('load', function() {
             setTimeout(function() {
                 const introSplash = document.getElementById('intro-splash');
@@ -1303,27 +1173,16 @@
                 ? 'bg-brand-card text-brand-secondary border-brand-secondary/60 shadow-brand-secondary/10' 
                 : 'bg-red-950/90 text-red-200 border-red-500/50'
             }`;
-            
             const icon = document.createElement('i');
             icon.className = type === 'success' ? 'fa-solid fa-circle-check text-brand-secondary' : 'fa-solid fa-triangle-exclamation text-red-400';
-            
             const text = document.createElement('span');
             text.className = 'text-xs font-semibold';
             text.innerText = message;
-            
             toast.appendChild(icon);
             toast.appendChild(text);
             container.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.classList.remove('translate-y-2');
-                toast.classList.add('translate-y-0');
-            }, 10);
-            
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-2');
-                setTimeout(() => toast.remove(), 300);
-            }, 4000);
+            setTimeout(() => { toast.classList.remove('translate-y-2'); toast.classList.add('translate-y-0'); }, 10);
+            setTimeout(() => { toast.classList.add('opacity-0', 'translate-y-2'); setTimeout(() => toast.remove(), 300); }, 4000);
         }
 
         function switchPage(pageId) {
@@ -1332,134 +1191,76 @@
         }
 
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        let mouseX = 0;
-        let mouseY = 0;
+        // ========== PARTICLES ==========
         let particles = [];
-
         document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            particles.forEach(particle => {
-                if (particle.element) {
-                    const rect = particle.element.getBoundingClientRect();
-                    const particleX = rect.left + rect.width / 2;
-                    const particleY = rect.top + rect.height / 2;
-                    
-                    const distance = Math.sqrt(Math.pow(mouseX - particleX, 2) + Math.pow(mouseY - particleY, 2));
-                    const maxDistance = 150;
-                    
-                    if (distance < maxDistance) {
-                        const intensity = 1 - (distance / maxDistance);
-                        particle.element.style.opacity = 0.3 + intensity * 0.7;
-                        particle.element.style.background = `linear-gradient(45deg, rgba(255, 165, 0, ${0.6 + intensity * 0.4}), rgba(120, 144, 156, ${0.6 + intensity * 0.4}))`;
-                        particle.element.style.boxShadow = `0 0 ${10 + intensity * 20}px rgba(120, 144, 156, ${0.8 + intensity * 0.2})`;
+            const mx = e.clientX, my = e.clientY;
+            particles.forEach(p => {
+                if (p.element) {
+                    const rect = p.element.getBoundingClientRect();
+                    const px = rect.left + rect.width/2, py = rect.top + rect.height/2;
+                    const dist = Math.sqrt((mx-px)**2 + (my-py)**2);
+                    if (dist < 150) {
+                        const intensity = 1 - dist/150;
+                        p.element.style.opacity = 0.3 + intensity * 0.7;
+                        p.element.style.background = `linear-gradient(45deg, rgba(255,165,0,${0.6+intensity*0.4}), rgba(120,144,156,${0.6+intensity*0.4}))`;
+                        p.element.style.boxShadow = `0 0 ${10+intensity*20}px rgba(120,144,156,${0.8+intensity*0.2})`;
                     } else {
-                        particle.element.style.opacity = '0.6';
-                        particle.element.style.background = 'linear-gradient(45deg, #FFA500, #78909C)';
-                        particle.element.style.boxShadow = '0 0 10px rgba(120, 144, 156, 0.8)';
+                        p.element.style.opacity = '0.6';
+                        p.element.style.background = 'linear-gradient(45deg, #FFA500, #78909C)';
+                        p.element.style.boxShadow = '0 0 10px rgba(120,144,156,0.8)';
                     }
                 }
             });
         });
 
         function createParticles() {
-            const particleField = document.getElementById('particle-field');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                const size = Math.random() * 5 + 1;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const animationDuration = Math.random() * 10 + 5;
-                const animationDelay = Math.random() * 5;
-                
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${posX}%`;
-                particle.style.top = `${posY}%`;
-                particle.style.animationDuration = `${animationDuration}s`;
-                particle.style.animationDelay = `${animationDelay}s`;
-                particle.style.background = 'linear-gradient(45deg, #FFA500, #78909C)';
-                particle.style.boxShadow = '0 0 10px rgba(120, 144, 156, 0.8)';
-                
-                particleField.appendChild(particle);
-                
-                particles.push({
-                    element: particle,
-                    x: posX,
-                    y: posY
-                });
+            const field = document.getElementById('particle-field');
+            for (let i = 0; i < 30; i++) {
+                const el = document.createElement('div');
+                el.classList.add('particle');
+                const size = Math.random()*5+1;
+                el.style.width = size+'px';
+                el.style.height = size+'px';
+                el.style.left = Math.random()*100+'%';
+                el.style.top = Math.random()*100+'%';
+                el.style.animationDuration = (Math.random()*10+5)+'s';
+                el.style.animationDelay = (Math.random()*5)+'s';
+                el.style.background = 'linear-gradient(45deg, #FFA500, #78909C)';
+                el.style.boxShadow = '0 0 10px rgba(120,144,156,0.8)';
+                field.appendChild(el);
+                particles.push({ element: el });
             }
         }
-
         window.addEventListener('load', createParticles);
 
         function animateSkillBars() {
-            const skillLevels = document.querySelectorAll('.skill-level');
-            skillLevels.forEach(level => {
-                const width = level.getAttribute('data-width');
-                level.style.width = `${width}%`;
+            document.querySelectorAll('.skill-level').forEach(el => {
+                el.style.width = el.getAttribute('data-width') + '%';
             });
         }
 
         function initTestimonialCarousel() {
             const carousel = document.querySelector('.testimonial-carousel');
-            let scrollPosition = 0;
-            const scrollStep = carousel.offsetWidth + 24;
-            
+            if (!carousel) return;
+            let pos = 0;
+            const step = carousel.offsetWidth + 24;
             setInterval(() => {
-                scrollPosition = (scrollPosition + scrollStep) % (scrollStep * 3);
-                carousel.scrollTo({
-                    left: scrollPosition,
-                    behavior: 'smooth'
-                });
+                pos = (pos + step) % (step * 3);
+                carousel.scrollTo({ left: pos, behavior: 'smooth' });
             }, 5000);
         }
+        document.addEventListener('DOMContentLoaded', initTestimonialCarousel);
 
-        document.addEventListener('DOMContentLoaded', function() {
-            initTestimonialCarousel();
+        document.getElementById('language-select')?.addEventListener('change', function() {
+            localStorage.setItem('lang', this.value);
+            location.reload();
         });
 
-function applyTheme() {
-  const saved = localStorage.getItem('theme') || 'dark';
-  if (saved === 'light') {
-    document.body.classList.add('light-mode');
-  } else {
-    document.body.classList.remove('light-mode');
-  }
-}
-const darkToggle = document.getElementById('dark-mode-toggle');
-if (darkToggle) {
-  darkToggle.addEventListener('click', () => {
-    const isLight = document.body.classList.toggle('light-mode');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-  });
-}
-
-function applyLanguage() {
-  const lang = localStorage.getItem('lang') || 'en';
-  const selector = document.getElementById('language-select');
-  if (selector) selector.value = lang;
-}
-const langSelect = document.getElementById('language-select');
-if (langSelect) {
-  langSelect.addEventListener('change', () => {
-    localStorage.setItem('lang', langSelect.value);
-    location.reload();
-  });
-}
-
-applyTheme();
-applyLanguage();
-
+        // ========== THREE.JS NETWORK SCENE ==========
         (function() {
             const container = document.getElementById('network-canvas-container');
             if (!container) return;
@@ -1474,8 +1275,7 @@ applyLanguage();
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
             function resizeRenderer() {
-                const w = container.clientWidth;
-                const h = container.clientHeight;
+                const w = container.clientWidth, h = container.clientHeight;
                 camera.aspect = w / h;
                 camera.updateProjectionMatrix();
                 renderer.setSize(w, h);
@@ -1486,16 +1286,8 @@ applyLanguage();
             const mainGroup = new THREE.Group();
             scene.add(mainGroup);
 
-            const PRIMARY = 0xFFA500;
-            const SECONDARY = 0x78909C;
-            const ACCENT = 0xFFCC00;
-            const DARK = 0x2A0A0A;
-            const WHITE = 0xE0E0E0;
+            const PRIMARY = 0xFFA500, SECONDARY = 0x78909C, ACCENT = 0xFFCC00, DARK = 0x2A0A0A, WHITE = 0xE0E0E0;
 
-            const matPrimaryGlow = new THREE.MeshStandardMaterial({ color: PRIMARY, emissive: ACCENT, emissiveIntensity: 0.9, roughness: 0.2, metalness: 0.9 });
-            const matSecondaryGlow = new THREE.MeshStandardMaterial({ color: SECONDARY, emissive: DARK, emissiveIntensity: 0.9, roughness: 0.2, metalness: 0.9 });
-            const matPrimaryWire = new THREE.MeshBasicMaterial({ color: PRIMARY, wireframe: true, transparent: true, opacity: 0.15 });
-            const matSecondaryWire = new THREE.MeshBasicMaterial({ color: SECONDARY, wireframe: true, transparent: true, opacity: 0.15 });
             const matDarkMetal = new THREE.MeshStandardMaterial({ color: 0x2A0A0A, roughness: 0.4, metalness: 0.8 });
             const matLens = new THREE.MeshStandardMaterial({ color: 0x0A0000, roughness: 0.05, metalness: 1.0 });
             const matScreen = new THREE.MeshStandardMaterial({ color: 0x1a0505, emissive: DARK, emissiveIntensity: 0.6 });
@@ -1503,303 +1295,193 @@ applyLanguage();
             const matLEDSecondary = new THREE.MeshBasicMaterial({ color: SECONDARY });
             const matBioRing = new THREE.MeshBasicMaterial({ color: SECONDARY, transparent: true, opacity: 0.6 });
             const matPacket = new THREE.MeshBasicMaterial({ color: WHITE });
+            const matPrimaryWire = new THREE.MeshBasicMaterial({ color: PRIMARY, wireframe: true, transparent: true, opacity: 0.15 });
+            const matSecondaryWire = new THREE.MeshBasicMaterial({ color: SECONDARY, wireframe: true, transparent: true, opacity: 0.15 });
 
-            const objects = [];
-
-            function createCCTV(position, color = 'primary') {
-                const group = new THREE.Group();
-                const armGeo = new THREE.BoxGeometry(0.15, 0.15, 1.2);
-                const arm = new THREE.Mesh(armGeo, matDarkMetal);
-                arm.position.z = 0.6;
-                group.add(arm);
-
-                const bodyGeo = new THREE.BoxGeometry(0.7, 0.5, 1.0);
-                const body = new THREE.Mesh(bodyGeo, matDarkMetal);
-                body.position.z = 1.3;
-                body.rotation.x = -0.3;
-                group.add(body);
-
-                const lensHousingGeo = new THREE.CylinderGeometry(0.22, 0.25, 0.35, 16);
-                const lensHousing = new THREE.Mesh(lensHousingGeo, matDarkMetal);
-                lensHousing.rotation.x = Math.PI / 2;
-                lensHousing.position.set(0, 0, 1.85);
-                lensHousing.rotation.x = -0.3;
-                group.add(lensHousing);
-
-                const lensGeo = new THREE.SphereGeometry(0.18, 16, 16, 0, Math.PI * 2, 0, Math.PI * 0.5);
-                const lens = new THREE.Mesh(lensGeo, matLens);
-                lens.position.set(0, 0, 2.02);
-                lens.rotation.x = -0.3;
-                group.add(lens);
-
-                const ledGeo = new THREE.SphereGeometry(0.04, 8, 8);
-                const led = new THREE.Mesh(ledGeo, color === 'primary' ? matLEDPrimary.clone() : matLEDSecondary.clone());
-                led.position.set(0.25, 0.18, 1.75);
-                led.userData = { isBlinking: true, blinkPhase: Math.random() * Math.PI * 2 };
-                group.add(led);
-
-                const auraGeo = new THREE.BoxGeometry(0.9, 0.7, 1.3);
-                const aura = new THREE.Mesh(auraGeo, color === 'primary' ? matPrimaryWire.clone() : matSecondaryWire.clone());
-                aura.position.z = 1.3;
-                aura.rotation.x = -0.3;
-                group.add(aura);
-
-                group.position.copy(position);
-                group.userData = { type: 'cctv', led: led, color: color };
-                mainGroup.add(group);
-                objects.push(group);
-                return group;
+            function createCCTV(pos, color = 'primary') {
+                const g = new THREE.Group();
+                const arm = new THREE.Mesh(new THREE.BoxGeometry(0.15,0.15,1.2), matDarkMetal);
+                arm.position.z = 0.6; g.add(arm);
+                const body = new THREE.Mesh(new THREE.BoxGeometry(0.7,0.5,1.0), matDarkMetal);
+                body.position.z = 1.3; body.rotation.x = -0.3; g.add(body);
+                const housing = new THREE.Mesh(new THREE.CylinderGeometry(0.22,0.25,0.35,16), matDarkMetal);
+                housing.rotation.x = Math.PI/2; housing.position.set(0,0,1.85); housing.rotation.x = -0.3; g.add(housing);
+                const lens = new THREE.Mesh(new THREE.SphereGeometry(0.18,16,16,0,Math.PI*2,0,Math.PI*0.5), matLens);
+                lens.position.set(0,0,2.02); lens.rotation.x = -0.3; g.add(lens);
+                const led = new THREE.Mesh(new THREE.SphereGeometry(0.04,8,8), color==='primary'?matLEDPrimary.clone():matLEDSecondary.clone());
+                led.position.set(0.25,0.18,1.75);
+                led.userData = { isBlinking: true, blinkPhase: Math.random()*Math.PI*2 };
+                g.add(led);
+                const aura = new THREE.Mesh(new THREE.BoxGeometry(0.9,0.7,1.3), color==='primary'?matPrimaryWire.clone():matSecondaryWire.clone());
+                aura.position.z = 1.3; aura.rotation.x = -0.3; g.add(aura);
+                g.position.copy(pos);
+                g.userData = { type: 'cctv', led: led };
+                mainGroup.add(g);
+                return g;
             }
 
-            function createLaptop(position, color = 'secondary') {
-                const group = new THREE.Group();
-                const baseGeo = new THREE.BoxGeometry(1.8, 0.08, 1.2);
-                const base = new THREE.Mesh(baseGeo, matDarkMetal);
-                group.add(base);
-
-                const frameGeo = new THREE.BoxGeometry(1.8, 1.2, 0.06);
-                const frame = new THREE.Mesh(frameGeo, matDarkMetal);
-                frame.position.set(0, 0.6, -0.55);
-                frame.rotation.x = 0.25;
-                group.add(frame);
-
-                const screenGeo = new THREE.PlaneGeometry(1.6, 1.0);
-                const screen = new THREE.Mesh(screenGeo, matScreen.clone());
-                screen.position.set(0, 0.6, -0.51);
-                screen.rotation.x = 0.25;
-                group.add(screen);
-
-                for (let i = 0; i < 8; i++) {
-                    const keyGeo = new THREE.BoxGeometry(1.5, 0.02, 0.08);
-                    const key = new THREE.Mesh(keyGeo, new THREE.MeshStandardMaterial({ color: 0x4A1414 }));
-                    key.position.set(0, 0.05, -0.3 + i * 0.13);
-                    group.add(key);
+            function createLaptop(pos, color = 'secondary') {
+                const g = new THREE.Group();
+                const base = new THREE.Mesh(new THREE.BoxGeometry(1.8,0.08,1.2), matDarkMetal);
+                g.add(base);
+                const frame = new THREE.Mesh(new THREE.BoxGeometry(1.8,1.2,0.06), matDarkMetal);
+                frame.position.set(0,0.6,-0.55); frame.rotation.x = 0.25; g.add(frame);
+                const screen = new THREE.Mesh(new THREE.PlaneGeometry(1.6,1.0), matScreen.clone());
+                screen.position.set(0,0.6,-0.51); screen.rotation.x = 0.25; g.add(screen);
+                for (let i=0;i<8;i++) {
+                    const key = new THREE.Mesh(new THREE.BoxGeometry(1.5,0.02,0.08), new THREE.MeshStandardMaterial({color:0x4A1414}));
+                    key.position.set(0,0.05,-0.3+i*0.13); g.add(key);
                 }
-
-                const auraGeo = new THREE.BoxGeometry(2.0, 1.4, 1.4);
-                const aura = new THREE.Mesh(auraGeo, color === 'primary' ? matPrimaryWire.clone() : matSecondaryWire.clone());
-                aura.position.set(0, 0.4, -0.2);
-                group.add(aura);
-
-                group.position.copy(position);
-                group.userData = { type: 'laptop', screen: screen, color: color };
-                mainGroup.add(group);
-                objects.push(group);
-                return group;
+                const aura = new THREE.Mesh(new THREE.BoxGeometry(2.0,1.4,1.4), color==='primary'?matPrimaryWire.clone():matSecondaryWire.clone());
+                aura.position.set(0,0.4,-0.2); g.add(aura);
+                g.position.copy(pos);
+                g.userData = { type: 'laptop', screen: screen };
+                mainGroup.add(g);
+                return g;
             }
 
-            function createServerRack(position, color = 'primary') {
-                const group = new THREE.Group();
-                const chassisGeo = new THREE.BoxGeometry(1.2, 3.5, 1.0);
-                const chassis = new THREE.Mesh(chassisGeo, matDarkMetal);
-                group.add(chassis);
-
-                for (let i = 0; i < 12; i++) {
-                    const unitY = -1.4 + i * 0.26;
-                    const faceGeo = new THREE.BoxGeometry(1.05, 0.22, 0.05);
-                    const face = new THREE.Mesh(faceGeo, new THREE.MeshStandardMaterial({ color: 0x2A0A0A }));
-                    face.position.set(0, unitY, 0.52);
-                    group.add(face);
-
-                    for (let j = 0; j < 4; j++) {
-                        const ledGeo = new THREE.SphereGeometry(0.035, 6, 6);
-                        const colors = [matLEDSecondary, matLEDPrimary, matLEDPrimary, matLEDSecondary];
-                        const led = new THREE.Mesh(ledGeo, colors[j % colors.length].clone());
-                        led.position.set(-0.3 + j * 0.2, unitY, 0.56);
-                        led.userData = { isBlinking: true, blinkPhase: Math.random() * Math.PI * 2 + j };
-                        group.add(led);
-                    }
-
-                    for (let v = 0; v < 6; v++) {
-                        const ventGeo = new THREE.BoxGeometry(0.12, 0.015, 0.02);
-                        const vent = new THREE.Mesh(ventGeo, new THREE.MeshBasicMaterial({ color: 0x1a0505 }));
-                        vent.position.set(0.25 + (v % 3) * 0.15, unitY, 0.56);
-                        group.add(vent);
+            function createServerRack(pos, color='primary') {
+                const g = new THREE.Group();
+                const chassis = new THREE.Mesh(new THREE.BoxGeometry(1.2,3.5,1.0), matDarkMetal);
+                g.add(chassis);
+                for (let i=0;i<12;i++) {
+                    const uy = -1.4+i*0.26;
+                    const face = new THREE.Mesh(new THREE.BoxGeometry(1.05,0.22,0.05), new THREE.MeshStandardMaterial({color:0x2A0A0A}));
+                    face.position.set(0,uy,0.52); g.add(face);
+                    for (let j=0;j<4;j++) {
+                        const led = new THREE.Mesh(new THREE.SphereGeometry(0.035,6,6), [matLEDSecondary,matLEDPrimary,matLEDPrimary,matLEDSecondary][j%4].clone());
+                        led.position.set(-0.3+j*0.2,uy,0.56);
+                        led.userData = { isBlinking: true, blinkPhase: Math.random()*Math.PI*2+j };
+                        g.add(led);
                     }
                 }
-
-                const wireGeo = new THREE.BoxGeometry(1.3, 3.7, 1.1);
-                const wireMesh = new THREE.Mesh(wireGeo, color === 'primary' ? matPrimaryWire.clone() : matSecondaryWire.clone());
-                group.add(wireMesh);
-
-                group.position.copy(position);
-                group.userData = { type: 'server', color: color };
-                mainGroup.add(group);
-                objects.push(group);
-                return group;
+                const wire = new THREE.Mesh(new THREE.BoxGeometry(1.3,3.7,1.1), color==='primary'?matPrimaryWire.clone():matSecondaryWire.clone());
+                g.add(wire);
+                g.position.copy(pos);
+                g.userData = { type: 'server' };
+                mainGroup.add(g);
+                return g;
             }
 
-            function createBiometricScanner(position, color = 'secondary') {
-                const group = new THREE.Group();
-                const pedestalGeo = new THREE.CylinderGeometry(0.6, 0.7, 0.3, 32);
-                const pedestal = new THREE.Mesh(pedestalGeo, matDarkMetal);
-                group.add(pedestal);
-
-                const bodyGeo = new THREE.CylinderGeometry(0.55, 0.6, 0.8, 32);
-                const body = new THREE.Mesh(bodyGeo, matDarkMetal);
-                body.position.y = 0.55;
-                group.add(body);
-
-                const screenGeo = new THREE.PlaneGeometry(0.7, 0.5);
-                const screen = new THREE.Mesh(screenGeo, new THREE.MeshBasicMaterial({ color: 0x1a0505 }));
-                screen.position.set(0, 0.7, 0.56);
-                group.add(screen);
-
-                for (let i = 0; i < 5; i++) {
-                    const arcGeo = new THREE.RingGeometry(0.08 + i * 0.06, 0.11 + i * 0.06, 32, 1, 0, Math.PI);
-                    const arc = new THREE.Mesh(arcGeo, new THREE.MeshBasicMaterial({ color: color === 'primary' ? PRIMARY : SECONDARY, transparent: true, opacity: 0.5 - i * 0.08, side: THREE.DoubleSide }));
-                    arc.position.set(0, 0.7, 0.57);
-                    arc.rotation.z = Math.PI;
-                    group.add(arc);
+            function createBiometricScanner(pos, color='secondary') {
+                const g = new THREE.Group();
+                const pedestal = new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.7,0.3,32), matDarkMetal);
+                g.add(pedestal);
+                const body = new THREE.Mesh(new THREE.CylinderGeometry(0.55,0.6,0.8,32), matDarkMetal);
+                body.position.y = 0.55; g.add(body);
+                const screen = new THREE.Mesh(new THREE.PlaneGeometry(0.7,0.5), new THREE.MeshBasicMaterial({color:0x1a0505}));
+                screen.position.set(0,0.7,0.56); g.add(screen);
+                for (let i=0;i<5;i++) {
+                    const arc = new THREE.Mesh(new THREE.RingGeometry(0.08+i*0.06,0.11+i*0.06,32,1,0,Math.PI),
+                        new THREE.MeshBasicMaterial({color: color==='primary'?PRIMARY:SECONDARY, transparent:true, opacity:0.5-i*0.08, side:THREE.DoubleSide}));
+                    arc.position.set(0,0.7,0.57); arc.rotation.z = Math.PI; g.add(arc);
                 }
-
-                const beamGeo = new THREE.PlaneGeometry(0.72, 0.03);
-                const beam = new THREE.Mesh(beamGeo, new THREE.MeshBasicMaterial({ color: color === 'primary' ? PRIMARY : SECONDARY, transparent: true, opacity: 0.9 }));
-                beam.position.set(0, 0.5, 0.58);
-                group.add(beam);
-
-                const ringGeo = new THREE.TorusGeometry(0.9, 0.02, 16, 64);
-                const ring = new THREE.Mesh(ringGeo, matBioRing.clone());
-                ring.rotation.x = Math.PI / 2;
-                ring.position.y = 0.9;
-                group.add(ring);
-
-                const ring2 = new THREE.Mesh(ringGeo, matBioRing.clone());
-                ring2.rotation.x = Math.PI / 2;
-                ring2.position.y = 1.15;
-                ring2.scale.setScalar(0.7);
-                group.add(ring2);
-
-                group.position.copy(position);
-                group.userData = { type: 'biometric', beam: beam, ring: ring, ring2: ring2, color: color };
-                mainGroup.add(group);
-                objects.push(group);
-                return group;
+                const beam = new THREE.Mesh(new THREE.PlaneGeometry(0.72,0.03),
+                    new THREE.MeshBasicMaterial({color: color==='primary'?PRIMARY:SECONDARY, transparent:true, opacity:0.9}));
+                beam.position.set(0,0.5,0.58); g.add(beam);
+                const ring = new THREE.Mesh(new THREE.TorusGeometry(0.9,0.02,16,64), matBioRing.clone());
+                ring.rotation.x = Math.PI/2; ring.position.y = 0.9; g.add(ring);
+                const ring2 = new THREE.Mesh(new THREE.TorusGeometry(0.9,0.02,16,64), matBioRing.clone());
+                ring2.rotation.x = Math.PI/2; ring2.position.y = 1.15; ring2.scale.setScalar(0.7); g.add(ring2);
+                g.position.copy(pos);
+                g.userData = { type: 'biometric', beam: beam, ring: ring, ring2: ring2 };
+                mainGroup.add(g);
+                return g;
             }
 
-            const cctv1 = createCCTV(new THREE.Vector3(-5, 3, 2), 'primary');
-            const cctv2 = createCCTV(new THREE.Vector3(5, 3, -1), 'secondary');
+            const cctv1 = createCCTV(new THREE.Vector3(-5,3,2),'primary');
+            const cctv2 = createCCTV(new THREE.Vector3(5,3,-1),'secondary');
             cctv2.rotation.y = Math.PI;
-
-            const laptop1 = createLaptop(new THREE.Vector3(-4, -1.5, 3), 'secondary');
+            const laptop1 = createLaptop(new THREE.Vector3(-4,-1.5,3),'secondary');
             laptop1.rotation.y = 0.4;
-            const laptop2 = createLaptop(new THREE.Vector3(4, -1.5, 2), 'primary');
+            const laptop2 = createLaptop(new THREE.Vector3(4,-1.5,2),'primary');
             laptop2.rotation.y = -0.4;
-
-            const server1 = createServerRack(new THREE.Vector3(0, -0.5, -3), 'primary');
-            const server2 = createServerRack(new THREE.Vector3(-2.5, -0.5, -4), 'secondary');
+            const server1 = createServerRack(new THREE.Vector3(0,-0.5,-3),'primary');
+            const server2 = createServerRack(new THREE.Vector3(-2.5,-0.5,-4),'secondary');
             server2.rotation.y = 0.3;
-            const server3 = createServerRack(new THREE.Vector3(2.5, -0.5, -4), 'primary');
+            const server3 = createServerRack(new THREE.Vector3(2.5,-0.5,-4),'primary');
             server3.rotation.y = -0.3;
-
-            const bio1 = createBiometricScanner(new THREE.Vector3(0, -2, 5), 'secondary');
-            const bio2 = createBiometricScanner(new THREE.Vector3(-6, -1, 0), 'primary');
+            const bio1 = createBiometricScanner(new THREE.Vector3(0,-2,5),'secondary');
+            const bio2 = createBiometricScanner(new THREE.Vector3(-6,-1,0),'primary');
             bio2.rotation.y = 0.6;
-            const bio3 = createBiometricScanner(new THREE.Vector3(6, -1, 0), 'secondary');
+            const bio3 = createBiometricScanner(new THREE.Vector3(6,-1,0),'secondary');
             bio3.rotation.y = -0.6;
 
-            const connectionPairs = [
-                [cctv1, server1], [cctv2, server1], [laptop1, server1], [laptop2, server1],
-                [bio1, server1], [bio2, server2], [bio3, server3],
-                [server1, server2], [server1, server3], [server2, server3],
-                [laptop1, bio1], [laptop2, bio1], [cctv1, laptop1], [cctv2, laptop2]
+            const pairs = [
+                [cctv1,server1],[cctv2,server1],[laptop1,server1],[laptop2,server1],
+                [bio1,server1],[bio2,server2],[bio3,server3],
+                [server1,server2],[server1,server3],[server2,server3],
+                [laptop1,bio1],[laptop2,bio1],[cctv1,laptop1],[cctv2,laptop2]
             ];
-
-            const connectionLines = [];
-            connectionPairs.forEach(([a, b]) => {
+            pairs.forEach(([a,b]) => {
                 const pts = [a.position.clone(), b.position.clone()];
-                const geo = new THREE.BufferGeometry().setFromPoints(pts);
-                const mat = new THREE.LineBasicMaterial({ color: Math.random() > 0.5 ? PRIMARY : SECONDARY, transparent: true, opacity: 0.25 });
-                const line = new THREE.Line(geo, mat);
+                const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
+                    new THREE.LineBasicMaterial({color: Math.random()>0.5?PRIMARY:SECONDARY, transparent:true, opacity:0.25}));
                 mainGroup.add(line);
-                connectionLines.push({ line, start: a.position, end: b.position });
             });
 
             const packets = [];
-            for (let i = 0; i < 18; i++) {
-                const geo = new THREE.SphereGeometry(0.06, 8, 8);
-                const mesh = new THREE.Mesh(geo, matPacket);
-                const pair = connectionPairs[Math.floor(Math.random() * connectionPairs.length)];
+            for (let i=0;i<18;i++) {
+                const mesh = new THREE.Mesh(new THREE.SphereGeometry(0.06,8,8), matPacket);
+                const pair = pairs[Math.floor(Math.random()*pairs.length)];
                 if (pair) {
                     mesh.position.copy(pair[0].position);
                     mainGroup.add(mesh);
-                    packets.push({ mesh, start: pair[0].position, end: pair[1].position, progress: Math.random(), speed: 0.008 + Math.random() * 0.02 });
+                    packets.push({ mesh, start: pair[0].position, end: pair[1].position, progress: Math.random(), speed: 0.008+Math.random()*0.02 });
                 }
             }
 
-            const statusLabels = ['SECURE', 'AUTH', 'LIVE', '1080P', 'ENCRYPT', 'VPN', 'SSL', 'Uptime 99.9%'];
-            const labelSprites = [];
-            statusLabels.forEach((text, idx) => {
+            const labels = ['SECURE','AUTH','LIVE','1080P','ENCRYPT','VPN','SSL','Uptime 99.9%'];
+            labels.forEach((text,idx) => {
                 const canvas = document.createElement('canvas');
-                canvas.width = 256; 
-                canvas.height = 64;
-                const ctx = canvas.getContext('2d');
-                ctx.clearRect(0, 0, 256, 64);
-                ctx.font = 'bold 28px monospace';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.shadowColor = idx % 2 === 0 ? '#FFA500' : '#78909C';
-                ctx.shadowBlur = 8;
-                ctx.fillStyle = idx % 2 === 0 ? '#FFA500' : '#78909C';
-                ctx.fillText(text, 128, 32);
-                const tex = new THREE.CanvasTexture(canvas);
-                const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true }));
-                spr.scale.set(3, 0.75, 1);
-                const theta = (idx / statusLabels.length) * Math.PI * 2;
-                const r = 7 + Math.random() * 5;
-                spr.position.set(Math.cos(theta) * r, (Math.random() - 0.5) * 10, Math.sin(theta) * r);
-                spr.userData = { bobSpeed: 0.003 + Math.random() * 0.005, bobPhase: Math.random() * Math.PI * 2, baseY: spr.position.y };
+                canvas.width=256; canvas.height=64;
+                const ctx=canvas.getContext('2d');
+                ctx.clearRect(0,0,256,64);
+                ctx.font='bold 28px monospace';
+                ctx.textAlign='center'; ctx.textBaseline='middle';
+                ctx.shadowColor=idx%2===0?'#FFA500':'#78909C'; ctx.shadowBlur=8;
+                ctx.fillStyle=idx%2===0?'#FFA500':'#78909C';
+                ctx.fillText(text,128,32);
+                const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(canvas), transparent: true }));
+                spr.scale.set(3,0.75,1);
+                const theta=(idx/labels.length)*Math.PI*2, r=7+Math.random()*5;
+                spr.position.set(Math.cos(theta)*r, (Math.random()-0.5)*10, Math.sin(theta)*r);
+                spr.userData = { bobSpeed: 0.003+Math.random()*0.005, bobPhase: Math.random()*Math.PI*2, baseY: spr.position.y };
                 mainGroup.add(spr);
-                labelSprites.push(spr);
             });
 
             const pGeo = new THREE.BufferGeometry();
-            const pPos = new Float32Array(300 * 3);
-            for (let i = 0; i < 300 * 3; i++) pPos[i] = (Math.random() - 0.5) * 35;
-            pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-            const pMat = new THREE.PointsMaterial({ color: Math.random() > 0.5 ? PRIMARY : SECONDARY, size: 0.06, transparent: true, opacity: 0.4 });
-            const particles3D = new THREE.Points(pGeo, pMat);
-            mainGroup.add(particles3D);
+            const pPos = new Float32Array(300*3);
+            for (let i=0;i<300*3;i++) pPos[i]=(Math.random()-0.5)*35;
+            pGeo.setAttribute('position', new THREE.BufferAttribute(pPos,3));
+            const pMat = new THREE.PointsMaterial({ color: Math.random()>0.5?PRIMARY:SECONDARY, size:0.06, transparent:true, opacity:0.4 });
+            const pts = new THREE.Points(pGeo, pMat);
+            mainGroup.add(pts);
 
-            const pGeo2 = new THREE.BufferGeometry();
-            const pPos2 = new Float32Array(200 * 3);
-            for (let i = 0; i < 200 * 3; i++) pPos2[i] = (Math.random() - 0.5) * 35;
-            pGeo2.setAttribute('position', new THREE.BufferAttribute(pPos2, 3));
-            const pMat2 = new THREE.PointsMaterial({ color: Math.random() > 0.5 ? ACCENT : DARK, size: 0.04, transparent: true, opacity: 0.3 });
-            const particles3D2 = new THREE.Points(pGeo2, pMat2);
-            mainGroup.add(particles3D2);
+            scene.add(new THREE.AmbientLight(0x4A1414,3));
+            const pl1 = new THREE.PointLight(PRIMARY,1.2,50); pl1.position.set(8,8,10); scene.add(pl1);
+            const pl2 = new THREE.PointLight(SECONDARY,1.0,50); pl2.position.set(-8,-4,8); scene.add(pl2);
 
-            scene.add(new THREE.AmbientLight(0x4A1414, 3));
-            const pl1 = new THREE.PointLight(PRIMARY, 1.2, 50); pl1.position.set(8, 8, 10); scene.add(pl1);
-            const pl2 = new THREE.PointLight(SECONDARY, 1.0, 50); pl2.position.set(-8, -4, 8); scene.add(pl2);
-            const pl3 = new THREE.PointLight(ACCENT, 0.6, 40); pl3.position.set(0, 10, -5); scene.add(pl3);
-            const pl4 = new THREE.PointLight(0x00ff88, 0.4, 30); pl4.position.set(5, 0, 5); scene.add(pl4);
-            const pl5 = new THREE.PointLight(SECONDARY, 0.4, 30); pl5.position.set(-5, 0, -5); scene.add(pl5);
+            let isDragging=false, isInteracting=false;
+            let prevPos={x:0,y:0};
+            let targetRotX=0,targetRotY=0;
 
-            let isDragging = false, isInteracting = false;
-            let prevPos = { x: 0, y: 0 };
-            let targetRotX = 0, targetRotY = 0;
-
-            container.addEventListener('mousedown', e => { isDragging = true; isInteracting = true; prevPos = { x: e.clientX, y: e.clientY }; });
-            window.addEventListener('mouseup', () => { isDragging = false; setTimeout(() => isInteracting = false, 5000); });
+            container.addEventListener('mousedown', e => { isDragging=true; isInteracting=true; prevPos={x:e.clientX,y:e.clientY}; });
+            window.addEventListener('mouseup', () => { isDragging=false; setTimeout(()=>isInteracting=false,5000); });
             container.addEventListener('mousemove', e => {
                 if (isDragging) {
-                    const dx = e.clientX - prevPos.x;
-                    const dy = e.clientY - prevPos.y;
-                    targetRotY += dx * 0.005;
-                    targetRotX += dy * 0.005;
-                    prevPos = { x: e.clientX, y: e.clientY };
+                    targetRotY += (e.clientX-prevPos.x)*0.005;
+                    targetRotX += (e.clientY-prevPos.y)*0.005;
+                    prevPos={x:e.clientX,y:e.clientY};
                 }
             });
-            container.addEventListener('touchstart', e => { isDragging = true; isInteracting = true; prevPos = { x: e.touches[0].clientX, y: e.touches[0].clientY }; }, {passive:false});
-            container.addEventListener('touchend', () => { isDragging = false; setTimeout(() => isInteracting = false, 5000); });
+            container.addEventListener('touchstart', e => { isDragging=true; isInteracting=true; prevPos={x:e.touches[0].clientX,y:e.touches[0].clientY}; }, {passive:false});
+            container.addEventListener('touchend', () => { isDragging=false; setTimeout(()=>isInteracting=false,5000); });
             container.addEventListener('touchmove', e => {
                 if (isDragging) {
-                    const dx = e.touches[0].clientX - prevPos.x;
-                    const dy = e.touches[0].clientY - prevPos.y;
-                    targetRotY += dx * 0.005;
-                    targetRotX += dy * 0.005;
-                    prevPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                    targetRotY += (e.touches[0].clientX-prevPos.x)*0.005;
+                    targetRotX += (e.touches[0].clientY-prevPos.y)*0.005;
+                    prevPos={x:e.touches[0].clientX,y:e.touches[0].clientY};
                 }
                 e.preventDefault();
             }, {passive:false});
@@ -1807,65 +1489,53 @@ applyLanguage();
             window.addEventListener('resize', resizeRenderer);
 
             const clock = new THREE.Clock();
-
             function animate() {
                 requestAnimationFrame(animate);
-                const t = clock.getElapsedTime();
-
+                const t=clock.getElapsedTime();
                 if (!isInteracting) targetRotY += 0.0006;
-                mainGroup.rotation.y += (targetRotY - mainGroup.rotation.y) * 0.03;
-                mainGroup.rotation.x += (targetRotX - mainGroup.rotation.x) * 0.03;
+                mainGroup.rotation.y += (targetRotY-mainGroup.rotation.y)*0.03;
+                mainGroup.rotation.x += (targetRotX-mainGroup.rotation.x)*0.03;
 
                 mainGroup.traverse(child => {
-                    if (child.userData && child.userData.isBlinking) {
-                        const intensity = 0.5 + 0.5 * Math.sin(t * 4 + child.userData.blinkPhase);
+                    if (child.userData?.isBlinking) {
+                        const intensity = 0.5+0.5*Math.sin(t*4+child.userData.blinkPhase);
                         if (child.material) child.material.opacity = intensity;
-                        child.scale.setScalar(0.8 + intensity * 0.4);
+                        child.scale.setScalar(0.8+intensity*0.4);
                     }
                 });
 
                 mainGroup.traverse(child => {
-                    if (child.userData && child.userData.type === 'biometric') {
-                        const beam = child.userData.beam;
-                        const ring = child.userData.ring;
-                        const ring2 = child.userData.ring2;
-                        if (beam) {
-                            beam.position.y = 0.45 + Math.sin(t * 3) * 0.3;
-                            if (beam.material) beam.material.opacity = 0.5 + Math.sin(t * 6) * 0.4;
-                        }
-                        if (ring && ring.material) {
-                            ring.rotation.z = t * 0.5;
-                            ring.material.opacity = 0.3 + Math.sin(t * 2) * 0.2;
-                        }
-                        if (ring2 && ring2.material) {
-                            ring2.rotation.z = -t * 0.7;
-                            ring2.material.opacity = 0.2 + Math.sin(t * 2.5 + 1) * 0.15;
-                        }
+                    if (child.userData?.type === 'biometric') {
+                        const beam=child.userData.beam;
+                        if (beam) { beam.position.y=0.45+Math.sin(t*3)*0.3; if(beam.material) beam.material.opacity=0.5+Math.sin(t*6)*0.4; }
+                        const ring=child.userData.ring;
+                        if (ring&&ring.material) { ring.rotation.z=t*0.5; ring.material.opacity=0.3+Math.sin(t*2)*0.2; }
+                        const ring2=child.userData.ring2;
+                        if (ring2&&ring2.material) { ring2.rotation.z=-t*0.7; ring2.material.opacity=0.2+Math.sin(t*2.5+1)*0.15; }
                     }
                 });
 
                 mainGroup.traverse(child => {
-                    if (child.userData && child.userData.type === 'cctv') {
-                        child.rotation.y = Math.sin(t * 0.8 + child.position.x) * 0.4;
-                        child.rotation.z = Math.sin(t * 0.5 + child.position.y) * 0.1;
+                    if (child.userData?.type === 'cctv') {
+                        child.rotation.y = Math.sin(t*0.8+child.position.x)*0.4;
+                        child.rotation.z = Math.sin(t*0.5+child.position.y)*0.1;
                     }
                 });
 
                 packets.forEach(pkt => {
                     pkt.progress += pkt.speed;
-                    if (pkt.progress > 1) pkt.progress = 0;
+                    if (pkt.progress>1) pkt.progress=0;
                     pkt.mesh.position.lerpVectors(pkt.start, pkt.end, pkt.progress);
                 });
 
-                labelSprites.forEach(spr => {
-                    spr.position.y = spr.userData.baseY + Math.sin(t * 1.2 + spr.userData.bobPhase) * 0.5;
-                    if (spr.material) spr.material.opacity = 0.4 + Math.sin(t + spr.userData.bobPhase) * 0.35;
+                mainGroup.children.forEach(child => {
+                    if (child.userData?.bobSpeed !== undefined) {
+                        child.position.y = child.userData.baseY + Math.sin(t*1.2+child.userData.bobPhase)*0.5;
+                        if (child.material) child.material.opacity = 0.4+Math.sin(t+child.userData.bobPhase)*0.35;
+                    }
                 });
 
-                particles3D.rotation.y = t * 0.015;
-                particles3D2.rotation.y = t * -0.012;
-
-                camera.lookAt(0, 0, 0);
+                pts.rotation.y = t*0.015;
                 renderer.render(scene, camera);
             }
             animate();
