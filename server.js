@@ -10,7 +10,13 @@ const app = express();
 const port = Number(process.env.PORT || 3000);
 const adminKey = process.env.ADMIN_KEY || "vibe-admin";
 
-const uploadDirectory = path.join(__dirname, "assets", "images", "products");
+const uploadDirectory = path.join(
+  __dirname,
+  "public",
+  "assets",
+  "images",
+  "products",
+);
 
 // Create the products image folder automatically
 fs.mkdirSync(uploadDirectory, { recursive: true });
