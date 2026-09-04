@@ -1,0 +1,230 @@
+/* ==========================================================================
+   Vibe Computer Engineering - Dahua Inspired Unified Design System
+   Brand Palette: White (#FFFFFF), Tech Yellow (#FFB800), Blue-Black (#090D16, #0F172A)
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+:root {
+  /* Brand Color Tokens */
+  --color-yellow: #ffb800;
+  --color-yellow-light: #facc15;
+  --color-yellow-glow: rgba(255, 184, 0, 0.25);
+
+  --color-blue-black: #090d16;
+  --color-blue-dark: #0f172a;
+  --color-blue-card: #141c2e;
+  --color-blue-border: #1e293b;
+
+  --color-white: #ffffff;
+  --color-slate-100: #f8fafc;
+  --color-slate-200: #e2e8f0;
+  --color-slate-400: #94a3b8;
+  --color-slate-700: #334155;
+  --color-slate-900: #0f172a;
+
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Syne", sans-serif;
+  --font-grotesk: "Space Grotesk", sans-serif;
+}
+
+/* Base Body Styles */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-blue-black);
+  color: var(--color-slate-100);
+  overflow-x: hidden;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-grotesk {
+  font-family: var(--font-grotesk);
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT MODE OVERRIDES (Clean Dahua White & Slate Styling)
+   -------------------------------------------------------------------------- */
+body.light-mode {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+body.light-mode header {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(226, 232, 240, 0.8) !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+}
+
+body.light-mode .bg-brand-dark,
+body.light-mode .bg-brand-darker,
+body.light-mode .bg-blue-black {
+  background-color: #ffffff !important;
+}
+
+body.light-mode .bg-brand-card,
+body.light-mode .glass-card {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06) !important;
+  color: #0f172a !important;
+}
+
+body.light-mode .text-slate-300,
+body.light-mode .text-slate-400 {
+  color: #475569 !important;
+}
+
+body.light-mode .text-white {
+  color: #0f172a !important;
+}
+
+body.light-mode .border-brand-border,
+body.light-mode .border-slate-800,
+body.light-mode .border-slate-700 {
+  border-color: #e2e8f0 !important;
+}
+
+body.light-mode input,
+body.light-mode select,
+body.light-mode textarea {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+body.light-mode .theme-toggle-btn {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+/* --------------------------------------------------------------------------
+   UI COMPONENTS & UTILITIES
+   -------------------------------------------------------------------------- */
+
+/* Glass Cards */
+.glass-card {
+  background: rgba(20, 28, 46, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 184, 0, 0.15);
+  border-radius: 1rem;
+  transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.glass-card:hover {
+  border-color: var(--color-yellow) !important;
+  box-shadow:
+    0 12px 30px rgba(255, 184, 0, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+}
+
+/* Dahua Style Badge */
+.dahua-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  background: rgba(255, 184, 0, 0.12);
+  color: var(--color-yellow);
+  border: 1px solid rgba(255, 184, 0, 0.3);
+}
+
+/* Yellow Action Buttons */
+.btn-yellow {
+  background: linear-gradient(135deg, #ffb800 0%, #facc15 100%);
+  color: #090d16;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 184, 0, 0.25);
+}
+
+.btn-yellow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 184, 0, 0.4);
+  background: linear-gradient(135deg, #facc15 0%, #ffb800 100%);
+}
+
+.btn-outline-yellow {
+  border: 2px solid var(--color-yellow);
+  color: var(--color-yellow);
+  font-weight: 600;
+  padding: 0.7rem 1.4rem;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.btn-outline-yellow:hover {
+  background: rgba(255, 184, 0, 0.1);
+  box-shadow: 0 0 15px rgba(255, 184, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Gradient Text */
+.text-gradient-yellow {
+  background: linear-gradient(135deg, #ffffff 30%, #ffb800 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+
+body.light-mode ::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #ffb800, #0f172a);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffb800;
+}
+
+/* Remove old conflicting scanline / glitch effects */
+.matrix-bg,
+.bg-radial-dots {
+  background-image: none !important;
+}
+
+.has-scanline::after,
+.scanline-wrapper::before,
+.animate-scanline,
+.cyber-grid::before {
+  display: none !important;
+}

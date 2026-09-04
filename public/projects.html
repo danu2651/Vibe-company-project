@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Engineering Projects & Case Studies | Vibe Computer Engineering
+    </title>
+
+    <!-- Tailwind CSS & FontAwesome Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Custom CSS & Theme Engine -->
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/theme.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/lang.js"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                yellow: "#FFB800",
+                accent: "#FACC15",
+                dark: "#090D16",
+                slate: "#0F172A",
+                card: "#141C2E",
+                border: "#1E293B",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              display: ["Syne", "sans-serif"],
+              grotesk: ["Space Grotesk", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-[#090D16] text-slate-100 min-h-screen flex flex-col">
+    <!-- ==========================================
+       1. STANDARDIZED HEADER NAVIGATION
+       ========================================== -->
+    <header
+      class="sticky top-0 z-50 w-full bg-brand-darker/90 backdrop-blur-md border-b border-brand-border/80 transition-all duration-300"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between"
+      >
+        <a href="index.html" class="flex items-center group logo-container">
+          <svg
+            class="h-16 w-auto logo-svg transition-all duration-300"
+            viewBox="0 0 250 85"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              stroke="#FFB800"
+              stroke-width="10.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+            >
+              <path d="M 16,22 L 28,49 L 40,22" />
+              <path d="M 53,33 L 53,49" />
+              <path d="M 66,12 L 66,49 M 66,22 A 13.5,13.5 0 0,1 66,49" />
+              <path d="M 93,35 H 118 A 13.5,13.5 0 1,0 105,49" />
+            </g>
+            <circle cx="53" cy="17" r="5.25" fill="#FFB800" />
+            <g
+              class="logo-symbol"
+              stroke="#94A3B8"
+              stroke-width="2.2"
+              fill="none"
+              opacity="0.9"
+            >
+              <rect
+                x="-9.5"
+                y="-9.5"
+                width="19"
+                height="19"
+                rx="4"
+                ry="4"
+                transform="translate(152, 23) rotate(45)"
+              />
+              <rect
+                x="-9.5"
+                y="-9.5"
+                width="19"
+                height="19"
+                rx="4"
+                ry="4"
+                transform="translate(139, 42) rotate(45)"
+              />
+              <rect
+                x="-9.5"
+                y="-9.5"
+                width="19"
+                height="19"
+                rx="4"
+                ry="4"
+                transform="translate(165, 42) rotate(45)"
+              />
+            </g>
+            <path
+              class="logo-symbol"
+              d="M 147,33 L 152,38 L 157,33"
+              fill="none"
+              stroke="#FFB800"
+              stroke-width="2.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <text
+              x="16"
+              y="70"
+              fill="#FFB800"
+              font-family="'Space Grotesk', 'Inter', sans-serif"
+              font-size="10.5"
+              font-weight="800"
+              letter-spacing="0.1em"
+            >
+              COMPUTER ENGINEERING
+            </text>
+          </svg>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-1">
+          <a
+            href="index.html"
+            class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/50 transition-all"
+            >Home</a
+          >
+          <a
+            href="products.html"
+            class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/50 transition-all"
+            >Products</a
+          >
+          <a
+            href="Services.html"
+            class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/50 transition-all"
+            >Services</a
+          >
+          <a
+            href="projects.html"
+            class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-primary bg-brand-card/50 transition-all"
+            >Projects</a
+          >
+          <a
+            href="contactus.html"
+            class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-primary hover:bg-brand-card/50 transition-all"
+            >Contact Us</a
+          >
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-4">
+          <div class="flex items-center gap-3">
+            <div class="flex flex-col leading-tight">
+              <span
+                class="text-[10px] font-medium text-brand-secondary uppercase tracking-wider"
+                >Call Us</span
+              >
+              <div class="flex items-center gap-1.5 mt-0.5">
+                <i class="fa-solid fa-phone text-brand-primary text-xs"></i>
+                <span class="text-sm font-bold text-brand-secondary"
+                  >+251 911 639 349</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <button
+            id="theme-toggle-btn"
+            class="theme-toggle-btn"
+            title="Toggle Theme"
+          >
+            <i class="fa-solid fa-moon" id="theme-icon-header"></i>
+          </button>
+        </div>
+
+        <button
+          id="mobile-menu-btn"
+          class="lg:hidden text-brand-secondary hover:text-brand-primary transition-colors focus:outline-none w-11 h-11 rounded-lg bg-brand-card flex items-center justify-center border border-brand-border/40"
+        >
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+
+      <div
+        id="mobile-menu"
+        class="hidden lg:hidden bg-brand-darker border-t border-brand-border/30 px-6 py-6 flex flex-col gap-3 shadow-2xl transition-all duration-300"
+      >
+        <a
+          href="index.html"
+          class="mobile-nav-btn text-left py-2.5 px-4 rounded-lg text-brand-secondary font-medium flex items-center justify-between hover:bg-brand-card/50"
+        >
+          <span>Home</span><i class="fa-solid fa-chevron-right text-xs"></i>
+        </a>
+        <a
+          href="products.html"
+          class="mobile-nav-btn text-left py-2.5 px-4 rounded-lg text-brand-secondary font-medium flex items-center justify-between hover:bg-brand-card/50"
+        >
+          <span>Products</span><i class="fa-solid fa-chevron-right text-xs"></i>
+        </a>
+        <a
+          href="Services.html"
+          class="mobile-nav-btn text-left py-2.5 px-4 rounded-lg text-brand-secondary font-medium flex items-center justify-between hover:bg-brand-card/50"
+        >
+          <span>Services</span><i class="fa-solid fa-chevron-right text-xs"></i>
+        </a>
+        <a
+          href="projects.html"
+          class="mobile-nav-btn text-left py-2.5 px-4 rounded-lg text-brand-primary bg-brand-card/50 font-medium flex items-center justify-between"
+        >
+          <span>Projects</span><i class="fa-solid fa-chevron-right text-xs"></i>
+        </a>
+        <a
+          href="contactus.html"
+          class="mobile-nav-btn text-left py-2.5 px-4 rounded-lg text-brand-secondary font-medium flex items-center justify-between hover:bg-brand-card/50"
+        >
+          <span>Contact Us</span
+          ><i class="fa-solid fa-chevron-right text-xs"></i>
+        </a>
+        <div class="pt-4 border-t border-brand-border/30 flex flex-col gap-3">
+          <div class="flex items-center justify-between px-4 py-2">
+            <span class="text-sm text-brand-secondary">Theme</span>
+            <button
+              id="mobile-theme-toggle"
+              class="text-sm text-brand-secondary hover:text-brand-primary transition-colors px-3 py-1 rounded-lg border border-brand-border/30"
+              onclick="window.toggleTheme()"
+            >
+              <i class="fa-solid fa-moon" id="mobile-theme-icon"></i>
+              <span id="mobile-theme-label" class="ml-2">Dark</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==========================================
+       2. HERO SECTION
+       ========================================== -->
+    <section
+      class="pt-32 pb-16 md:pt-40 md:pb-20 bg-gradient-to-b from-[#0F172A] to-[#090D16] border-b border-slate-800 relative"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+        <span class="dahua-badge" data-i18n="projects.badge"
+          >PROVEN TRACK RECORD</span
+        >
+        <h1
+          class="text-4xl sm:text-5xl font-extrabold font-display text-white"
+          data-i18n="projects.title"
+        >
+          Engineering Case Studies
+        </h1>
+        <p
+          class="text-slate-300 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed font-sans"
+          data-i18n="projects.subtitle"
+        >
+          Explore our recent enterprise security camera arrays, structured
+          network installations, and computer laboratory deployments in Addis
+          Ababa.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================
+       3. CASE STUDIES GRID
+       ========================================== -->
+    <section class="py-16 flex-1">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <button
+            onclick="filterProjects('all')"
+            class="project-filter-btn active px-5 py-2.5 rounded-full text-xs font-bold bg-[#FFB800] text-[#090D16] transition-all shadow-md"
+            data-filter="all"
+            data-i18n="projects.filter_all"
+          >
+            All Projects
+          </button>
+          <button
+            onclick="filterProjects('cctv')"
+            class="project-filter-btn px-5 py-2.5 rounded-full text-xs font-bold bg-[#141C2E] text-slate-300 hover:text-[#FFB800] border border-slate-700 transition-all"
+            data-filter="cctv"
+            data-i18n="projects.filter_cctv"
+          >
+            CCTV Deployments
+          </button>
+          <button
+            onclick="filterProjects('network')"
+            class="project-filter-btn px-5 py-2.5 rounded-full text-xs font-bold bg-[#141C2E] text-slate-300 hover:text-[#FFB800] border border-slate-700 transition-all"
+            data-filter="network"
+            data-i18n="projects.filter_network"
+          >
+            Network Infrastructure
+          </button>
+          <button
+            onclick="filterProjects('lab')"
+            class="project-filter-btn px-5 py-2.5 rounded-full text-xs font-bold bg-[#141C2E] text-slate-300 hover:text-[#FFB800] border border-slate-700 transition-all"
+            data-filter="lab"
+            data-i18n="projects.filter_lab"
+          >
+            IT Training Labs
+          </button>
+        </div>
+
+        <!-- Case Studies List -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          id="projects-grid"
+        >
+          <!-- Case Study 1 -->
+          <div
+            class="project-card glass-card p-6 flex flex-col justify-between"
+            data-category="cctv"
+          >
+            <div class="space-y-4">
+              <div
+                class="w-full h-48 rounded-xl bg-[#090D16] border border-slate-800 flex items-center justify-center text-[#FFB800] text-5xl relative overflow-hidden group"
+              >
+                <i
+                  class="fa-solid fa-building-shield group-hover:scale-110 transition-transform"
+                ></i>
+                <span class="absolute top-3 right-3 dahua-badge text-[10px]"
+                  >COMMERCIAL BANK</span
+                >
+              </div>
+              <div class="space-y-2">
+                <span
+                  class="text-[11px] font-semibold text-[#FFB800] uppercase tracking-wider"
+                  >32-CAM 4K CCTV ARRAY</span
+                >
+                <h3 class="text-xl font-bold text-white font-display">
+                  Commercial Bank HQ Security Array
+                </h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                  Deployed 32 Dahua 4K Starlight IP Cameras with Dual 16-CH
+                  NVRs, ANPR License Plate Recognition, and Central Monitoring
+                  Station.
+                </p>
+              </div>
+            </div>
+            <div
+              class="pt-6 border-t border-slate-800 mt-6 grid grid-cols-2 gap-2 text-xs text-slate-300"
+            >
+              <div>
+                <span class="text-slate-500">Cameras:</span>
+                <strong class="text-white">32 IP Units</strong>
+              </div>
+              <div>
+                <span class="text-slate-500">Storage:</span>
+                <strong class="text-white">30 Days 4K</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Study 2 -->
+          <div
+            class="project-card glass-card p-6 flex flex-col justify-between"
+            data-category="network"
+          >
+            <div class="space-y-4">
+              <div
+                class="w-full h-48 rounded-xl bg-[#090D16] border border-slate-800 flex items-center justify-center text-cyan-400 text-5xl relative overflow-hidden group"
+              >
+                <i
+                  class="fa-solid fa-sitemap group-hover:scale-110 transition-transform"
+                ></i>
+                <span
+                  class="absolute top-3 right-3 dahua-badge text-[10px] text-cyan-400 border-cyan-500/30 bg-cyan-500/10"
+                  >6-STOREY OFFICE</span
+                >
+              </div>
+              <div class="space-y-2">
+                <span
+                  class="text-[11px] font-semibold text-cyan-400 uppercase tracking-wider"
+                  >FIBER OPTIC & CAT6 NETWORK</span
+                >
+                <h3 class="text-xl font-bold text-white font-display">
+                  Multi-Storey Office Gigabit Network
+                </h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                  Structured optical fiber riser cabling, 128 RJ45 wall drops,
+                  managed PoE switches, and central server rack cabinet setup.
+                </p>
+              </div>
+            </div>
+            <div
+              class="pt-6 border-t border-slate-800 mt-6 grid grid-cols-2 gap-2 text-xs text-slate-300"
+            >
+              <div>
+                <span class="text-slate-500">Drops:</span>
+                <strong class="text-white">128 Points</strong>
+              </div>
+              <div>
+                <span class="text-slate-500">Speed:</span>
+                <strong class="text-white">10 Gbps Riser</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Study 3 -->
+          <div
+            class="project-card glass-card p-6 flex flex-col justify-between"
+            data-category="lab"
+          >
+            <div class="space-y-4">
+              <div
+                class="w-full h-48 rounded-xl bg-[#090D16] border border-slate-800 flex items-center justify-center text-amber-400 text-5xl relative overflow-hidden group"
+              >
+                <i
+                  class="fa-solid fa-laptop-code group-hover:scale-110 transition-transform"
+                ></i>
+                <span
+                  class="absolute top-3 right-3 dahua-badge text-[10px] text-amber-400 border-amber-500/30 bg-amber-500/10"
+                  >50-WORKSTATION LAB</span
+                >
+              </div>
+              <div class="space-y-2">
+                <span
+                  class="text-[11px] font-semibold text-amber-400 uppercase tracking-wider"
+                  >IT EDUCATION LABORATORY</span
+                >
+                <h3 class="text-xl font-bold text-white font-display">
+                  Vocational Institute Computer Lab
+                </h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                  Supplied 50 Workstation PCs, installed genuine Windows 11 Pro,
+                  configured local classroom domain server, and network cabling.
+                </p>
+              </div>
+            </div>
+            <div
+              class="pt-6 border-t border-slate-800 mt-6 grid grid-cols-2 gap-2 text-xs text-slate-300"
+            >
+              <div>
+                <span class="text-slate-500">PCs Setup:</span>
+                <strong class="text-white">50 Workstations</strong>
+              </div>
+              <div>
+                <span class="text-slate-500">OS:</span>
+                <strong class="text-white">Licensed Win 11 Pro</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+       4. STANDARDIZED FOOTER
+       ========================================== -->
+    <footer
+      class="bg-[#06090F] border-t border-slate-800 pt-16 pb-8 text-slate-400"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12"
+        >
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FFB800] to-[#FACC15] flex items-center justify-center text-[#090D16] font-extrabold text-xl"
+              >
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <div>
+                <span
+                  class="font-display font-extrabold text-lg text-white block leading-none"
+                  data-i18n="nav.brand_name"
+                  >VIBE COMPUTER</span
+                >
+                <span
+                  class="text-[10px] font-semibold text-[#FFB800] tracking-widest block mt-1"
+                  data-i18n="nav.brand_tagline"
+                  >ENGINEERING & SECURITY</span
+                >
+              </div>
+            </div>
+            <p
+              class="text-sm leading-relaxed text-slate-400"
+              data-i18n="footer.about_desc"
+            >
+              Vibe Computer Engineering provides end-to-end CCTV camera arrays,
+              computer networking, licensed OS setup, and IT education solutions
+              in Addis Ababa.
+            </p>
+          </div>
+
+          <div>
+            <h4
+              class="text-white font-display font-bold text-base mb-4 border-l-2 border-[#FFB800] pl-3"
+              data-i18n="footer.quick_links"
+            >
+              Quick Links
+            </h4>
+            <ul class="space-y-2.5 text-sm">
+              <li>
+                <a
+                  href="index.html"
+                  class="hover:text-[#FFB800] transition-colors flex items-center gap-2"
+                  ><i
+                    class="fa-solid fa-chevron-right text-[10px] text-[#FFB800]"
+                  ></i>
+                  <span data-i18n="nav.home">Home</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href="products.html"
+                  class="hover:text-[#FFB800] transition-colors flex items-center gap-2"
+                  ><i
+                    class="fa-solid fa-chevron-right text-[10px] text-[#FFB800]"
+                  ></i>
+                  <span data-i18n="nav.products">Products</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href="Services.html"
+                  class="hover:text-[#FFB800] transition-colors flex items-center gap-2"
+                  ><i
+                    class="fa-solid fa-chevron-right text-[10px] text-[#FFB800]"
+                  ></i>
+                  <span data-i18n="nav.services">Services</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href="projects.html"
+                  class="hover:text-[#FFB800] transition-colors flex items-center gap-2"
+                  ><i
+                    class="fa-solid fa-chevron-right text-[10px] text-[#FFB800]"
+                  ></i>
+                  <span data-i18n="nav.projects">Projects</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href="contactus.html"
+                  class="hover:text-[#FFB800] transition-colors flex items-center gap-2"
+                  ><i
+                    class="fa-solid fa-chevron-right text-[10px] text-[#FFB800]"
+                  ></i>
+                  <span data-i18n="nav.contact">Contact Us</span></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4
+              class="text-white font-display font-bold text-base mb-4 border-l-2 border-[#FFB800] pl-3"
+              data-i18n="footer.services_title"
+            >
+              Our Solutions
+            </h4>
+            <ul class="space-y-2.5 text-sm">
+              <li>
+                <a
+                  href="Services.html"
+                  class="hover:text-[#FFB800] transition-colors flex items-center gap-2"
+                  ><i class="fa-solid fa-camera text-xs text-[#FFB800]"></i>
+                  <span data-i18n="services.cctv.title"
+                    >CCTV Security Cameras</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="Services.html"
+                  class="hover:text-[#FFB800] transition-colors flex items-center gap-2"
+                  ><i
+                    class="fa-solid fa-network-wired text-xs text-[#FFB800]"
+                  ></i>
+                  <span data-i18n="services.network.title"
+                    >Computer Networking</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="Services.html"
+                  class="hover:text-[#FFB800] transition-colors flex items-center gap-2"
+                  ><i class="fa-brands fa-windows text-xs text-[#FFB800]"></i>
+                  <span data-i18n="services.os.title"
+                    >Licensed Windows OS</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="Services.html"
+                  class="hover:text-[#FFB800] transition-colors flex items-center gap-2"
+                  ><i
+                    class="fa-solid fa-graduation-cap text-xs text-[#FFB800]"
+                  ></i>
+                  <span data-i18n="services.training.title"
+                    >Computer Training</span
+                  ></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4
+              class="text-white font-display font-bold text-base mb-4 border-l-2 border-[#FFB800] pl-3"
+              data-i18n="contact.badge"
+            >
+              Contact Info
+            </h4>
+            <ul class="space-y-3 text-sm">
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-location-dot text-[#FFB800] mt-1"></i>
+                <span data-i18n="nav.location">Addis Ababa, Ethiopia</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-phone text-[#FFB800] mt-1"></i>
+                <span>+251 91 123 4567 / +251 92 987 6543</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-envelope text-[#FFB800] mt-1"></i>
+                <span>info@vibecomputer.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-slate-800/80 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500"
+        >
+          <p data-i18n="footer.rights">
+            © 2026 Vibe Computer Engineering. All rights reserved.
+          </p>
+          <span class="dahua-badge text-[10px] py-1 px-2.5"
+            >Dahua Security Authorized Partner</span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuButton = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        if (menuButton && mobileMenu) {
+          menuButton.addEventListener("click", function () {
+            mobileMenu.classList.toggle("hidden");
+          });
+        }
+      });
+
+      function filterProjects(category) {
+        const cards = document.querySelectorAll(".project-card");
+        const btns = document.querySelectorAll(".project-filter-btn");
+
+        btns.forEach((btn) => {
+          if (btn.getAttribute("data-filter") === category) {
+            btn.className =
+              "project-filter-btn active px-5 py-2.5 rounded-full text-xs font-bold bg-[#FFB800] text-[#090D16] transition-all shadow-md";
+          } else {
+            btn.className =
+              "project-filter-btn px-5 py-2.5 rounded-full text-xs font-bold bg-[#141C2E] text-slate-300 hover:text-[#FFB800] border border-slate-700 transition-all";
+          }
+        });
+
+        cards.forEach((card) => {
+          const cat = card.getAttribute("data-category");
+          if (category === "all" || cat === category) {
+            card.style.display = "flex";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

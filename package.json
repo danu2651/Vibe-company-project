@@ -1,0 +1,20 @@
+{
+  "name": "vibe-computer-store",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "description": "Vibe Computer products and order management backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^4.21.2",
+    "multer": "^2.2.0",
+    "pg": "^8.23.0"
+  }
+}

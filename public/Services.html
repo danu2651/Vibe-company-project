@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Services | Vibe Computer Engineering</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/images/vibe-logo%20(1).png"
+    />
+
+    <!-- Tailwind CSS & Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Custom CSS & Theme Engine -->
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/theme.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/lang.js"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                yellow: "#FFB800",
+                accent: "#FACC15",
+                dark: "#090D16",
+                slate: "#0F172A",
+                card: "#141C2E",
+                border: "#1E293B",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              display: ["Syne", "sans-serif"],
+              grotesk: ["Space Grotesk", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      #site-header .navbar-shell {
+        background: transparent;
+        border: 1px solid transparent;
+        box-shadow: none;
+        transition:
+          background 0.35s ease,
+          border-color 0.35s ease,
+          box-shadow 0.35s ease;
+      }
+      #site-header.is-scrolled .navbar-shell {
+        background: rgba(255, 255, 255, 0.68);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-color: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+      }
+      #site-header .navbar-links,
+      #site-header .navbar-links a {
+        background: transparent;
+        border-color: transparent;
+        box-shadow: none;
+      }
+      #site-header .navbar-links a:hover {
+        background: rgba(255, 255, 255, 0.42);
+      }
+      #site-header #mobile-menu > div:last-child {
+        display: none;
+      }
+      #site-header #mobile-menu {
+        background: rgba(255, 255, 255, 0.84);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        border-radius: 1rem;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      }
+      #site-header #mobile-menu a {
+        color: #475569;
+      }
+      #site-header #mobile-menu a:hover {
+        color: #0f172a;
+        background: rgba(255, 255, 255, 0.5);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-brand-dark text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-brand-yellow selection:text-brand-dark"
+  >
+    <!-- ==========================================
+       1. FLOATING GLASSMORPHIC NAVBAR
+       ========================================== -->
+    <header
+      id="site-header"
+      class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-2"
+    >
+      <div
+        class="navbar-shell max-w-7xl mx-4 lg:mx-auto px-6 flex items-center justify-between rounded-2xl my-1 h-20"
+      >
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img
+            src="assets/images/vibe-logo.png"
+            alt="Vibe Computer Engineering"
+            class="h-12 sm:h-14 w-auto object-contain group-hover:scale-105 transition-transform"
+          />
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav
+          class="navbar-links hidden lg:flex items-center gap-1 p-1.5 rounded-xl"
+        >
+          <a
+            href="index.html"
+            class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-white/50 transition-all"
+            data-i18n="nav.home"
+            >Home</a
+          >
+          <a
+            href="index.html#about"
+            class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-white/50 transition-all"
+            >About</a
+          >
+          <a
+            href="index.html#featured-showcase"
+            class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-white/50 transition-all"
+            data-i18n="nav.products"
+            >Products</a
+          >
+          <a
+            href="index.html#services"
+            class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-900 bg-white shadow-sm transition-all"
+            data-i18n="nav.services"
+            >Services</a
+          >
+          <a
+            href="index.html#projects"
+            class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-white/50 transition-all"
+            data-i18n="nav.projects"
+            >Projects</a
+          >
+          <a
+            href="index.html#contact"
+            class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-white/50 transition-all"
+            data-i18n="nav.contact"
+            >Contact</a
+          >
+        </nav>
+
+        <!-- Header Actions -->
+        <div class="hidden lg:flex items-center">
+          <a
+            href="tel:+251911639349"
+            class="flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-brand-primary hover:text-slate-900 transition-all font-bold text-xs shadow-sm"
+          >
+            <i class="fa-solid fa-phone text-brand-primary"></i> +251 911 639
+            349
+          </a>
+        </div>
+
+        <!-- Mobile Controls -->
+        <div class="lg:hidden">
+          <button
+            id="mobile-menu-btn"
+            class="lg:hidden text-slate-900 hover:text-brand-primary transition-colors focus:outline-none w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center"
+            onclick="
+              document.getElementById('mobile-menu').classList.toggle('hidden')
+            "
+          >
+            <i class="fa-solid fa-bars text-base"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Drawer Menu -->
+      <div
+        id="mobile-menu"
+        class="hidden lg:hidden bg-brand-card border-t border-brand-border px-4 py-6 rounded-b-2xl absolute w-full left-0 top-full mt-2 shadow-2xl"
+      >
+        <div class="space-y-4 flex flex-col">
+          <a
+            href="index.html"
+            class="py-2.5 text-slate-600 font-semibold text-sm border-b border-slate-100"
+            data-i18n="nav.home"
+            >Home</a
+          >
+          <a
+            href="index.html#about"
+            class="py-2.5 text-slate-600 font-semibold text-sm border-b border-slate-100"
+            >About</a
+          >
+          <a
+            href="index.html#featured-showcase"
+            class="py-2.5 text-slate-600 font-semibold text-sm border-b border-slate-100"
+            data-i18n="nav.products"
+            >Products</a
+          >
+          <a
+            href="index.html#services"
+            class="py-2.5 text-slate-900 font-semibold text-sm border-b border-slate-100"
+            data-i18n="nav.services"
+            >Services</a
+          >
+          <a
+            href="index.html#projects"
+            class="py-2.5 text-slate-600 font-semibold text-sm border-b border-slate-100"
+            data-i18n="nav.projects"
+            >Projects</a
+          >
+          <a
+            href="index.html#contact"
+            class="py-2.5 text-slate-600 font-semibold text-sm"
+            data-i18n="nav.contact"
+            >Contact</a
+          >
+        </div>
+
+        <div class="pt-6 mt-4 border-t border-brand-border flex flex-col gap-4">
+          <select
+            class="language-select bg-brand-dark text-slate-200 text-sm px-4 py-3 rounded-lg border border-brand-border focus:outline-none"
+          >
+            <option value="en">🇺🇸 English</option>
+            <option value="am">🇪🇹 አማርኛ (Amharic)</option>
+          </select>
+          <a
+            href="tel:+251911234567"
+            class="bg-brand-yellow text-brand-dark font-bold text-center py-3 rounded-lg flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-phone"></i>
+            <span data-i18n="nav.call_us">Call Us</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==========================================
+       2. SERVICES HERO HEADER
+       ========================================== -->
+    <section
+      class="pt-48 pb-20 relative overflow-hidden flex flex-col items-center justify-center min-h-[50vh]"
+    >
+      <!-- Background Glows -->
+      <div
+        class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand-yellow/10 blur-[120px] rounded-full pointer-events-none"
+      ></div>
+
+      <div
+        class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10"
+      >
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-yellow/10 border border-brand-yellow/20 text-brand-yellow text-xs font-bold tracking-widest uppercase"
+        >
+          <span
+            class="w-2 h-2 rounded-full bg-brand-yellow animate-pulse"
+          ></span>
+          <span data-i18n="services.badge">Enterprise Capabilities</span>
+        </div>
+        <h1
+          class="text-5xl sm:text-7xl font-extrabold font-display text-white tracking-tight"
+          data-i18n="services.title"
+        >
+          Our Professional
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-amber-500"
+            >Services</span
+          >
+        </h1>
+        <p
+          class="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed font-light"
+          data-i18n="services.subtitle"
+        >
+          We provide reliable IT solutions, networking services, security
+          systems, computer training, and technology products for businesses and
+          individuals.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================
+       3. BENTO-STYLE SERVICES BREAKDOWN
+       ========================================== -->
+    <section class="py-12 pb-32 relative z-10 flex-1">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <!-- Service 1 & 2 Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- CCTV Security -->
+          <div
+            class="group relative bg-brand-card/40 backdrop-blur-xl border border-brand-border hover:border-brand-yellow/30 rounded-[2rem] p-10 transition-all duration-500 overflow-hidden flex flex-col h-full"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-brand-yellow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            ></div>
+
+            <div class="flex items-start justify-between mb-8 relative z-10">
+              <div
+                class="w-16 h-16 rounded-2xl bg-brand-yellow/10 border border-brand-yellow/20 flex items-center justify-center text-brand-yellow text-2xl group-hover:scale-110 transition-transform duration-500"
+              >
+                <i class="fa-solid fa-video"></i>
+              </div>
+              <span
+                class="text-[10px] font-bold tracking-widest text-brand-yellow/80 bg-brand-yellow/10 px-3 py-1.5 rounded-full uppercase"
+                >Dahua Authorized</span
+              >
+            </div>
+
+            <div class="space-y-4 relative z-10 flex-1">
+              <h2
+                class="text-2xl font-bold font-display text-white group-hover:text-brand-yellow transition-colors"
+                data-i18n="services.cctv.title"
+              >
+                Security Camera (CCTV)
+              </h2>
+              <p
+                class="text-slate-400 text-sm leading-relaxed"
+                data-i18n="services.cctv.desc"
+              >
+                Supply, installation, configuration, and maintenance of CCTV
+                cameras and surveillance accessories for homes, offices,
+                schools, and businesses.
+              </p>
+              <ul class="space-y-3 pt-4 text-sm text-slate-300">
+                <li class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-brand-yellow"></div>
+                  High Definition IP & HDCVI Dahua Cameras
+                </li>
+                <li class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-brand-yellow"></div>
+                  NVR / DVR Centralized Storage Setup
+                </li>
+                <li class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-brand-yellow"></div>
+                  Smartphone Remote Live Stream Sync
+                </li>
+              </ul>
+            </div>
+
+            <div class="pt-8 mt-auto relative z-10">
+              <a
+                href="contactus.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-brand-yellow transition-colors"
+              >
+                <span data-i18n="services.request">Request Service</span>
+                <i
+                  class="fa-solid fa-arrow-right-long group-hover:translate-x-2 transition-transform"
+                ></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Network Installation -->
+          <div
+            class="group relative bg-brand-card/40 backdrop-blur-xl border border-brand-border hover:border-cyan-500/30 rounded-[2rem] p-10 transition-all duration-500 overflow-hidden flex flex-col h-full"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            ></div>
+
+            <div class="flex items-start justify-between mb-8 relative z-10">
+              <div
+                class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-2xl group-hover:scale-110 transition-transform duration-500"
+              >
+                <i class="fa-solid fa-network-wired"></i>
+              </div>
+              <span
+                class="text-[10px] font-bold tracking-widest text-cyan-400/80 bg-cyan-500/10 px-3 py-1.5 rounded-full uppercase"
+                >Enterprise Setup</span
+              >
+            </div>
+
+            <div class="space-y-4 relative z-10 flex-1">
+              <h2
+                class="text-2xl font-bold font-display text-white group-hover:text-cyan-400 transition-colors"
+                data-i18n="services.network.title"
+              >
+                Computer Network Installation
+              </h2>
+              <p
+                class="text-slate-400 text-sm leading-relaxed"
+                data-i18n="services.network.desc"
+              >
+                Professional installation of wired and wireless networks
+                including routers, switches, structured cabling, and network
+                configuration.
+              </p>
+              <ul class="space-y-3 pt-4 text-sm text-slate-300">
+                <li class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>
+                  Structured Fiber Optic & Cat6 Cabling
+                </li>
+                <li class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>
+                  Managed Gigabit PoE Ethernet Switches
+                </li>
+                <li class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>
+                  Enterprise Wi-Fi Access Points
+                </li>
+              </ul>
+            </div>
+
+            <div class="pt-8 mt-auto relative z-10">
+              <a
+                href="contactus.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-cyan-400 transition-colors"
+              >
+                <span data-i18n="services.request">Request Service</span>
+                <i
+                  class="fa-solid fa-arrow-right-long group-hover:translate-x-2 transition-transform"
+                ></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 3 & 4 Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Windows Installation -->
+          <div
+            class="group relative bg-brand-card/40 backdrop-blur-xl border border-brand-border hover:border-indigo-500/30 rounded-[2rem] p-10 transition-all duration-500 overflow-hidden flex flex-col h-full"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            ></div>
+
+            <div class="flex items-start justify-between mb-8 relative z-10">
+              <div
+                class="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-2xl group-hover:scale-110 transition-transform duration-500"
+              >
+                <i class="fa-brands fa-windows"></i>
+              </div>
+              <span
+                class="text-[10px] font-bold tracking-widest text-indigo-400/80 bg-indigo-500/10 px-3 py-1.5 rounded-full uppercase"
+                >Genuine OS</span
+              >
+            </div>
+
+            <div class="space-y-4 relative z-10 flex-1">
+              <h2
+                class="text-2xl font-bold font-display text-white group-hover:text-indigo-400 transition-colors"
+                data-i18n="services.os.title"
+              >
+                Licensed Windows OS
+              </h2>
+              <p
+                class="text-slate-400 text-sm leading-relaxed"
+                data-i18n="services.os.desc"
+              >
+                Install, activate, configure, update, and optimize genuine
+                Microsoft Windows operating systems.
+              </p>
+              <ul class="space-y-3 pt-4 text-sm text-slate-300">
+                <li class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-indigo-400"></div>
+                  Genuine Windows 10 & 11 Pro Activation
+                </li>
+                <li class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-indigo-400"></div>
+                  System Hardening & Security Patching
+                </li>
+                <li class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-indigo-400"></div>
+                  Official Updates & Defender Firewall
+                </li>
+              </ul>
+            </div>
+
+            <div class="pt-8 mt-auto relative z-10">
+              <a
+                href="contactus.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-indigo-400 transition-colors"
+              >
+                <span data-i18n="services.request">Request Service</span>
+                <i
+                  class="fa-solid fa-arrow-right-long group-hover:translate-x-2 transition-transform"
+                ></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Computer Training -->
+          <div
+            class="group relative bg-brand-card/40 backdrop-blur-xl border border-brand-border hover:border-amber-500/30 rounded-[2rem] p-10 transition-all duration-500 overflow-hidden flex flex-col h-full"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            ></div>
+
+            <div class="flex items-start justify-between mb-8 relative z-10">
+              <div
+                class="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-2xl group-hover:scale-110 transition-transform duration-500"
+              >
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <span
+                class="text-[10px] font-bold tracking-widest text-amber-400/80 bg-amber-500/10 px-3 py-1.5 rounded-full uppercase"
+                >Practical Education</span
+              >
+            </div>
+
+            <div class="space-y-4 relative z-10 flex-1">
+              <h2
+                class="text-2xl font-bold font-display text-white group-hover:text-amber-400 transition-colors"
+                data-i18n="services.training.title"
+              >
+                Computer Training
+              </h2>
+              <p
+                class="text-slate-400 text-sm leading-relaxed"
+                data-i18n="services.training.desc"
+              >
+                Provide practical computer training including Microsoft Office,
+                computer basics, networking, programming, and IT skills.
+              </p>
+              <ul class="space-y-3 pt-4 text-sm text-slate-300">
+                <li class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
+                  Microsoft Word, Excel, PowerPoint Mastery
+                </li>
+                <li class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
+                  Networking Fundamentals & Cable Crimping
+                </li>
+                <li class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
+                  Introductory Programming & Web Basics
+                </li>
+              </ul>
+            </div>
+
+            <div class="pt-8 mt-auto relative z-10">
+              <a
+                href="contactus.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-amber-400 transition-colors"
+              >
+                <span data-i18n="services.request">Request Service</span>
+                <i
+                  class="fa-solid fa-arrow-right-long group-hover:translate-x-2 transition-transform"
+                ></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+       4. STANDARDIZED FOOTER
+       ========================================== -->
+    <footer class="bg-[#06090F] border-t border-brand-border pt-20 pb-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-16"
+        >
+          <div class="space-y-6 lg:col-span-1">
+            <div class="flex items-center gap-4">
+              <img
+                src="assets/images/vibe-logo.png"
+                alt="Vibe Computer Engineering"
+                class="h-12 w-auto object-contain"
+              />
+            </div>
+            <p
+              class="text-sm leading-relaxed text-slate-500 font-light"
+              data-i18n="footer.about_desc"
+            >
+              End-to-end CCTV camera arrays, computer networking, licensed OS
+              setup, and IT education solutions in Addis Ababa.
+            </p>
+          </div>
+
+          <div>
+            <h4
+              class="text-white font-display font-bold text-sm uppercase tracking-widest mb-6"
+              data-i18n="footer.quick_links"
+            >
+              Quick Links
+            </h4>
+            <ul class="space-y-4 text-sm">
+              <li>
+                <a
+                  href="index.html"
+                  class="text-slate-400 hover:text-brand-yellow transition-colors flex items-center gap-3"
+                  ><div
+                    class="w-1 h-1 bg-brand-yellow rounded-full opacity-0 hover:opacity-100"
+                  ></div>
+                  <span data-i18n="nav.home">Home</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href="products.html"
+                  class="text-slate-400 hover:text-brand-yellow transition-colors flex items-center gap-3"
+                  ><div
+                    class="w-1 h-1 bg-brand-yellow rounded-full opacity-0 hover:opacity-100"
+                  ></div>
+                  <span data-i18n="nav.products">Products</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href="Services.html"
+                  class="text-brand-yellow transition-colors flex items-center gap-3"
+                  ><div class="w-1 h-1 bg-brand-yellow rounded-full"></div>
+                  <span data-i18n="nav.services">Services</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href="projects.html"
+                  class="text-slate-400 hover:text-brand-yellow transition-colors flex items-center gap-3"
+                  ><div
+                    class="w-1 h-1 bg-brand-yellow rounded-full opacity-0 hover:opacity-100"
+                  ></div>
+                  <span data-i18n="nav.projects">Projects</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href="contactus.html"
+                  class="text-slate-400 hover:text-brand-yellow transition-colors flex items-center gap-3"
+                  ><div
+                    class="w-1 h-1 bg-brand-yellow rounded-full opacity-0 hover:opacity-100"
+                  ></div>
+                  <span data-i18n="nav.contact">Contact Us</span></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4
+              class="text-white font-display font-bold text-sm uppercase tracking-widest mb-6"
+              data-i18n="footer.services_title"
+            >
+              Our Solutions
+            </h4>
+            <ul class="space-y-4 text-sm">
+              <li>
+                <a
+                  href="Services.html"
+                  class="text-slate-400 hover:text-brand-yellow transition-colors flex items-center gap-3"
+                  ><i class="fa-solid fa-camera text-xs"></i>
+                  <span data-i18n="services.cctv.title">CCTV Security</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href="Services.html"
+                  class="text-slate-400 hover:text-brand-yellow transition-colors flex items-center gap-3"
+                  ><i class="fa-solid fa-network-wired text-xs"></i>
+                  <span data-i18n="services.network.title"
+                    >Computer Networking</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="Services.html"
+                  class="text-slate-400 hover:text-brand-yellow transition-colors flex items-center gap-3"
+                  ><i class="fa-brands fa-windows text-xs"></i>
+                  <span data-i18n="services.os.title">Licensed OS</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href="Services.html"
+                  class="text-slate-400 hover:text-brand-yellow transition-colors flex items-center gap-3"
+                  ><i class="fa-solid fa-graduation-cap text-xs"></i>
+                  <span data-i18n="services.training.title"
+                    >IT Training</span
+                  ></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4
+              class="text-white font-display font-bold text-sm uppercase tracking-widest mb-6"
+              data-i18n="contact.badge"
+            >
+              Contact Info
+            </h4>
+            <ul class="space-y-4 text-sm text-slate-400">
+              <li class="flex items-start gap-4">
+                <div
+                  class="w-8 h-8 rounded-full bg-brand-dark flex items-center justify-center text-brand-yellow shrink-0"
+                >
+                  <i class="fa-solid fa-location-dot text-xs"></i>
+                </div>
+                <span class="mt-1" data-i18n="nav.location"
+                  >Addis Ababa, Ethiopia</span
+                >
+              </li>
+              <li class="flex items-start gap-4">
+                <div
+                  class="w-8 h-8 rounded-full bg-brand-dark flex items-center justify-center text-brand-yellow shrink-0"
+                >
+                  <i class="fa-solid fa-phone text-xs"></i>
+                </div>
+                <span class="mt-1">+251 91 123 4567<br />+251 92 987 6543</span>
+              </li>
+              <li class="flex items-start gap-4">
+                <div
+                  class="w-8 h-8 rounded-full bg-brand-dark flex items-center justify-center text-brand-yellow shrink-0"
+                >
+                  <i class="fa-solid fa-envelope text-xs"></i>
+                </div>
+                <span class="mt-1">info@vibecomputer.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-brand-border/60 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-600"
+        >
+          <p data-i18n="footer.rights">
+            © 2026 Vibe Computer Engineering. All rights reserved.
+          </p>
+          <div
+            class="px-3 py-1.5 rounded-full bg-brand-card border border-brand-border text-slate-400 font-medium tracking-wide"
+          >
+            Dahua Security Authorized Partner
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const siteHeader = document.getElementById("site-header");
+      function updateHeaderOnScroll() {
+        siteHeader.classList.toggle("is-scrolled", window.scrollY > 24);
+      }
+      updateHeaderOnScroll();
+      window.addEventListener("scroll", updateHeaderOnScroll, {
+        passive: true,
+      });
+    </script>
+  </body>
+</html>
