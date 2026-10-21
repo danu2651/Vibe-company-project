@@ -1,9 +1,12 @@
 {
-  "version": 2,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/public/$1"
+      "source": "/api/:path*",
+      "destination": "https://vibe-company-project.onrender.com/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/public/$1"
     }
   ]
 }
