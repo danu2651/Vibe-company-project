@@ -213,7 +213,7 @@ async function seedDatabase() {
           image
         )
         VALUES ($1, $2, $3, $4, $5, $6)
-        ON CONFLICT (name) DO NOTHING
+        ON CONFLICT DO NOTHING
         `,
         product,
       );
