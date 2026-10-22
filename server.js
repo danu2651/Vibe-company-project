@@ -1,59 +1,27 @@
 const path = require("node:path");
-const fs = require("node:fs");
 const express = require("express");
 const multer = require("multer");
 const { Pool } = require("pg");
 require("dotenv").config();
 
 const app = express();
-
 const port = Number(process.env.PORT || 3000);
 const adminKey = process.env.ADMIN_KEY || "vibe-admin";
 
-const uploadDirectory = path.join(
-  __dirname,
-  "public",
-  "assets",
-  "images",
-  "products",
-);
-
-// Create the products image folder automatically
-fs.mkdirSync(uploadDirectory, { recursive: true });
-
 // ============================================================
-// MULTER IMAGE UPLOAD CONFIGURATION
+// IMAGE UPLOAD CONFIGURATION — SUPABASE STORAGE
 // ============================================================
-
-const storage = multer.diskStorage({
-  destination: (request, file, callback) => {
-    callback(null, uploadDirectory);
-  },
-
-  filename: (request, file, callback) => {
-    const extension = path.extname(file.originalname).toLowerCase();
-
-    const baseName = path
-      .basename(file.originalname, extension)
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "");
-
-    const uniqueName = `${baseName}-${Date.now()}${extension}`;
-
-    callback(null, uniqueName);
-  },
-});
 
 const upload = multer({
-  storage,
-
-  limits: {
-    fileSize: 5 * 1024 * 1024, // 5 MB
-  },
-
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (request, file, callback) => {
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/gif",
+    ];
 
     if (!allowedTypes.includes(file.mimetype)) {
       return callback(
@@ -65,6 +33,71 @@ const upload = multer({
   },
 });
 
+async function uploadProductImage(file) {
+  if (!file) return "";
+
+  const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/+$/, "");
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error("Supabase Storage environment variables are missing.");
+  }
+
+  const extensionByType = {
+    "image/jpeg": "jpg",
+    "image/png": "png",
+    "image/webp": "webp",
+    "image/gif": "gif",
+  };
+
+  const extension = extensionByType[file.mimetype];
+
+  if (!extension) {
+    throw new Error("Unsupported image type.");
+  }
+
+  const safeBaseName =
+    path
+      .basename(file.originalname, path.extname(file.originalname))
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 60) || "product";
+
+  const fileName = `${Date.now()}-${safeBaseName}.${extension}`;
+  const objectPath = `products/${fileName}`;
+
+  const uploadResponse = await fetch(
+    `${supabaseUrl}/storage/v1/object/product-images/${objectPath}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${supabaseKey}`,
+        apikey: supabaseKey,
+        "Content-Type": file.mimetype,
+        "x-upsert": "false",
+      },
+      body: file.buffer,
+    },
+  );
+
+  if (!uploadResponse.ok) {
+    const details = await uploadResponse.text();
+
+    console.error(
+      "Supabase image upload failed:",
+      uploadResponse.status,
+      details,
+    );
+
+    throw new Error(
+      "Image upload failed. Check Supabase Storage configuration.",
+    );
+  }
+
+  return `${supabaseUrl}/storage/v1/object/public/product-images/${objectPath}`;
+}
+
 // ============================================================
 // POSTGRESQL CONNECTION
 // ============================================================
@@ -73,7 +106,6 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-// Test database connection
 pool.on("error", (error) => {
   console.error("Unexpected PostgreSQL error:", error);
 });
@@ -85,7 +117,6 @@ pool.on("error", (error) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve the frontend from public/
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 
@@ -119,7 +150,6 @@ const seedProducts = [
     10,
     "assets/images/cctv-bg.jpg",
   ],
-
   [
     "Dahua Pro 16-Channel 4K NVR",
     "cctv",
@@ -128,7 +158,6 @@ const seedProducts = [
     8,
     "assets/images/server.jpg",
   ],
-
   [
     "24-Port Gigabit Managed Switch",
     "network",
@@ -137,7 +166,6 @@ const seedProducts = [
     15,
     "assets/images/network.jpg",
   ],
-
   [
     "AX3000 Dual-Band Wi-Fi 6 AP",
     "network",
@@ -146,7 +174,6 @@ const seedProducts = [
     12,
     "assets/images/network.jpg",
   ],
-
   [
     "Dell OptiPlex Tower Workstation",
     "computing",
@@ -155,7 +182,6 @@ const seedProducts = [
     6,
     "assets/images/image.jpg",
   ],
-
   [
     "HP ProBook 15.6 Full HD",
     "computing",
@@ -164,7 +190,6 @@ const seedProducts = [
     5,
     "assets/images/image.jpg",
   ],
-
   [
     "Genuine Windows 11 Pro License",
     "accessories",
@@ -173,7 +198,6 @@ const seedProducts = [
     25,
     "assets/images/image.jpg",
   ],
-
   [
     "Cat6 Pure Copper UTP Cable Box",
     "accessories",
@@ -189,9 +213,7 @@ async function seedDatabase() {
     "SELECT COUNT(*)::int AS count FROM products",
   );
 
-  if (result.rows[0].count > 0) {
-    return;
-  }
+  if (result.rows[0].count > 0) return;
 
   console.log("No products found. Seeding products...");
 
@@ -220,8 +242,7 @@ async function seedDatabase() {
     }
 
     await client.query("COMMIT");
-
-    console.log("✅ Products seeded successfully.");
+    console.log("Products seeded successfully.");
   } catch (error) {
     await client.query("ROLLBACK");
     throw error;
@@ -253,17 +274,15 @@ app.get("/api/products", async (request, response) => {
 });
 
 // ============================================================
-// CREATE ORDER
+// CREATE ORDER — TRANSACTION-SAFE STOCK MANAGEMENT
 // ============================================================
 
-// ============================================================
-// CREATE ORDER
-// TRANSACTION-SAFE STOCK MANAGEMENT
-// ============================================================
 app.post("/api/orders", async (request, response) => {
-  const client = await pool.connect();
+  let client;
 
   try {
+    client = await pool.connect();
+
     const {
       product_id,
       customer_name,
@@ -274,10 +293,6 @@ app.post("/api/orders", async (request, response) => {
     } = request.body;
 
     const numericQuantity = Number(quantity);
-
-    // ----------------------------------------------------------
-    // Validate customer information
-    // ----------------------------------------------------------
 
     if (
       !customer_name ||
@@ -290,28 +305,14 @@ app.post("/api/orders", async (request, response) => {
       });
     }
 
-    // ----------------------------------------------------------
-    // Start database transaction
-    // ----------------------------------------------------------
-
     await client.query("BEGIN");
 
     let product = null;
 
-    // ----------------------------------------------------------
-    // Check and LOCK product row
-    //
-    // FOR UPDATE prevents two customers from purchasing the
-    // same remaining stock simultaneously.
-    // ----------------------------------------------------------
-
     if (product_id) {
       const productResult = await client.query(
         `
-        SELECT
-          id,
-          name,
-          stock
+        SELECT id, name, stock
         FROM products
         WHERE id = $1
         FOR UPDATE
@@ -321,7 +322,6 @@ app.post("/api/orders", async (request, response) => {
 
       product = productResult.rows[0];
 
-      // Product does not exist
       if (!product) {
         await client.query("ROLLBACK");
 
@@ -330,10 +330,6 @@ app.post("/api/orders", async (request, response) => {
         });
       }
 
-      // --------------------------------------------------------
-      // Check available stock
-      // --------------------------------------------------------
-
       if (product.stock < numericQuantity) {
         await client.query("ROLLBACK");
 
@@ -341,10 +337,6 @@ app.post("/api/orders", async (request, response) => {
           error: `Only ${product.stock} item(s) are currently in stock`,
         });
       }
-
-      // --------------------------------------------------------
-      // Decrease stock
-      // --------------------------------------------------------
 
       await client.query(
         `
@@ -358,10 +350,6 @@ app.post("/api/orders", async (request, response) => {
       );
     }
 
-    // ----------------------------------------------------------
-    // Create the order
-    // ----------------------------------------------------------
-
     const orderResult = await client.query(
       `
       INSERT INTO orders
@@ -374,10 +362,7 @@ app.post("/api/orders", async (request, response) => {
         message
       )
       VALUES ($1, $2, $3, $4, $5, $6)
-      RETURNING
-        id,
-        status,
-        created_at
+      RETURNING id, status, created_at
       `,
       [
         product_id || null,
@@ -389,14 +374,6 @@ app.post("/api/orders", async (request, response) => {
       ],
     );
 
-    // ----------------------------------------------------------
-    // Everything succeeded
-    // Commit both:
-    //
-    // 1. Stock reduction
-    // 2. Order creation
-    // ----------------------------------------------------------
-
     await client.query("COMMIT");
 
     response.status(201).json({
@@ -407,16 +384,12 @@ app.post("/api/orders", async (request, response) => {
       message: "Order submitted successfully",
     });
   } catch (error) {
-    // ----------------------------------------------------------
-    // Something failed.
-    //
-    // Roll back BOTH the order and stock change.
-    // ----------------------------------------------------------
-
-    try {
-      await client.query("ROLLBACK");
-    } catch (rollbackError) {
-      console.error("Rollback failed:", rollbackError);
+    if (client) {
+      try {
+        await client.query("ROLLBACK");
+      } catch (rollbackError) {
+        console.error("Rollback failed:", rollbackError);
+      }
     }
 
     console.error("POST /api/orders error:", error);
@@ -425,16 +398,12 @@ app.post("/api/orders", async (request, response) => {
       error: "Failed to create order",
     });
   } finally {
-    // ----------------------------------------------------------
-    // Always return the PostgreSQL connection to the pool
-    // ----------------------------------------------------------
-
-    client.release();
+    if (client) client.release();
   }
 });
 
 // ============================================================
-// ADMIN - GET PRODUCTS
+// ADMIN — GET PRODUCTS
 // ============================================================
 
 app.get("/api/admin/products", requireAdmin, async (request, response) => {
@@ -456,11 +425,7 @@ app.get("/api/admin/products", requireAdmin, async (request, response) => {
 });
 
 // ============================================================
-// ADMIN - CREATE PRODUCT
-// ============================================================
-
-// ============================================================
-// ADMIN - CREATE PRODUCT WITH IMAGE UPLOAD
+// ADMIN — CREATE PRODUCT WITH SUPABASE IMAGE UPLOAD
 // ============================================================
 
 app.post(
@@ -477,58 +442,28 @@ app.post(
         stock = 0,
       } = request.body;
 
-      // --------------------------------------------------------
-      // Validate required fields
-      // --------------------------------------------------------
-
       if (!name || !category) {
-        if (request.file) {
-          fs.unlinkSync(request.file.path);
-        }
-
         return response.status(400).json({
           error: "Product name and category are required",
         });
       }
 
-      // --------------------------------------------------------
-      // Validate price and stock
-      // --------------------------------------------------------
-
       const numericPrice = Number(price);
       const numericStock = Number(stock);
 
       if (!Number.isFinite(numericPrice) || numericPrice < 0) {
-        if (request.file) {
-          fs.unlinkSync(request.file.path);
-        }
-
         return response.status(400).json({
           error: "Price must be a valid positive number",
         });
       }
 
       if (!Number.isInteger(numericStock) || numericStock < 0) {
-        if (request.file) {
-          fs.unlinkSync(request.file.path);
-        }
-
         return response.status(400).json({
           error: "Stock must be a valid non-negative integer",
         });
       }
 
-      // --------------------------------------------------------
-      // Save relative image path
-      // --------------------------------------------------------
-
-      const imagePath = request.file
-        ? `/assets/images/products/${request.file.filename}`
-        : "";
-
-      // --------------------------------------------------------
-      // Insert product into PostgreSQL
-      // --------------------------------------------------------
+      const imagePath = await uploadProductImage(request.file);
 
       const result = await pool.query(
         `
@@ -570,18 +505,6 @@ app.post(
     } catch (error) {
       console.error("POST /api/admin/products error:", error);
 
-      // --------------------------------------------------------
-      // If database insertion failed, remove uploaded image
-      // --------------------------------------------------------
-
-      if (request.file) {
-        try {
-          fs.unlinkSync(request.file.path);
-        } catch (cleanupError) {
-          console.error("Failed to remove uploaded image:", cleanupError);
-        }
-      }
-
       if (error.code === "23505") {
         return response.status(409).json({
           error: "A product with this name already exists",
@@ -594,27 +517,80 @@ app.post(
     }
   },
 );
+
 // ============================================================
-// ADMIN - UPDATE PRODUCT
+// ADMIN — UPDATE PRODUCT AND OPTIONALLY REPLACE IMAGE
 // ============================================================
 
 app.patch(
   "/api/admin/products/:id",
   requireAdmin,
+  upload.single("image"),
   async (request, response) => {
     try {
-      const fields = [
-        "name",
-        "category",
-        "description",
-        "price",
-        "stock",
-        "image",
-      ];
+      const { name, category, description, price, stock } = request.body;
 
-      const updates = fields.filter(
-        (field) => request.body[field] !== undefined,
-      );
+      const updates = [];
+      const values = [];
+
+      function addUpdate(field, value) {
+        values.push(value);
+        updates.push(`${field} = $${values.length}`);
+      }
+
+      if (name !== undefined) {
+        if (!name.trim()) {
+          return response.status(400).json({
+            error: "Product name is required",
+          });
+        }
+
+        addUpdate("name", name.trim());
+      }
+
+      if (category !== undefined) {
+        if (!category.trim()) {
+          return response.status(400).json({
+            error: "Product category is required",
+          });
+        }
+
+        addUpdate("category", category.trim());
+      }
+
+      if (description !== undefined) {
+        addUpdate("description", description.trim());
+      }
+
+      if (price !== undefined) {
+        const numericPrice = Number(price);
+
+        if (!Number.isFinite(numericPrice) || numericPrice < 0) {
+          return response.status(400).json({
+            error: "Price must be a valid non-negative number",
+          });
+        }
+
+        addUpdate("price", numericPrice);
+      }
+
+      if (stock !== undefined) {
+        const numericStock = Number(stock);
+
+        if (!Number.isInteger(numericStock) || numericStock < 0) {
+          return response.status(400).json({
+            error: "Stock must be a valid non-negative integer",
+          });
+        }
+
+        addUpdate("stock", numericStock);
+      }
+
+      // Keep the existing image unless a new image was selected.
+      if (request.file) {
+        const imageUrl = await uploadProductImage(request.file);
+        addUpdate("image", imageUrl);
+      }
 
       if (!updates.length) {
         return response.status(400).json({
@@ -622,27 +598,13 @@ app.patch(
         });
       }
 
-      const values = [];
-      const assignments = [];
-
-      updates.forEach((field, index) => {
-        let value = request.body[field];
-
-        if (field === "price" || field === "stock") {
-          value = Number(value);
-        }
-
-        values.push(value);
-        assignments.push(`${field} = $${index + 1}`);
-      });
-
       values.push(request.params.id);
 
       const result = await pool.query(
         `
         UPDATE products
         SET
-          ${assignments.join(", ")},
+          ${updates.join(", ")},
           updated_at = CURRENT_TIMESTAMP
         WHERE id = $${values.length}
         `,
@@ -661,6 +623,12 @@ app.patch(
     } catch (error) {
       console.error("PATCH /api/admin/products error:", error);
 
+      if (error.code === "23505") {
+        return response.status(409).json({
+          error: "A product with this name already exists",
+        });
+      }
+
       response.status(500).json({
         error: "Failed to update product",
       });
@@ -669,7 +637,7 @@ app.patch(
 );
 
 // ============================================================
-// ADMIN - DELETE PRODUCT
+// ADMIN — DELETE PRODUCT
 // ============================================================
 
 app.delete(
@@ -703,7 +671,7 @@ app.delete(
 );
 
 // ============================================================
-// ADMIN - GET ORDERS
+// ADMIN — GET ORDERS
 // ============================================================
 
 app.get("/api/admin/orders", requireAdmin, async (request, response) => {
@@ -729,12 +697,17 @@ app.get("/api/admin/orders", requireAdmin, async (request, response) => {
 });
 
 // ============================================================
-// ADMIN - UPDATE ORDER STATUS
+// ADMIN — UPDATE ORDER STATUS
 // ============================================================
 
 app.patch("/api/admin/orders/:id", requireAdmin, async (request, response) => {
   try {
-    const allowedStatuses = ["new", "processing", "completed", "cancelled"];
+    const allowedStatuses = [
+      "new",
+      "processing",
+      "completed",
+      "cancelled",
+    ];
 
     if (!allowedStatuses.includes(request.body.status)) {
       return response.status(400).json({
@@ -744,10 +717,10 @@ app.patch("/api/admin/orders/:id", requireAdmin, async (request, response) => {
 
     const result = await pool.query(
       `
-        UPDATE orders
-        SET status = $1
-        WHERE id = $2
-        `,
+      UPDATE orders
+      SET status = $1
+      WHERE id = $2
+      `,
       [request.body.status, request.params.id],
     );
 
@@ -785,19 +758,17 @@ async function startServer() {
   try {
     await pool.query("SELECT NOW()");
 
-    console.log("✅ PostgreSQL connected successfully.");
+    console.log("PostgreSQL connected successfully.");
 
     await seedDatabase();
 
     app.listen(port, () => {
-      console.log(`🚀 Vibe store backend running at http://localhost:${port}`);
-
-      console.log(`📊 Products API: http://localhost:${port}/api/products`);
-
-      console.log(`🔐 Admin dashboard: http://localhost:${port}/admin`);
+      console.log(`Vibe store backend running at http://localhost:${port}`);
+      console.log(`Products API: http://localhost:${port}/api/products`);
+      console.log(`Admin dashboard: http://localhost:${port}/admin`);
     });
   } catch (error) {
-    console.error("❌ Failed to start server.");
+    console.error("Failed to start server.");
     console.error(error.message);
 
     process.exit(1);

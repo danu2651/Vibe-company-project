@@ -763,10 +763,7 @@
                     >JPG, PNG, WEBP or GIF. Maximum 5 MB.</span
                   >
                 </div>
-                <div class="field" id="image-path-field" hidden>
-                  <label for="product-image-path">Current image path</label
-                  ><input id="product-image-path" name="imagePath" />
-                </div>
+
                 <div class="form-actions">
                   <button
                     id="save-product"
@@ -1133,18 +1130,20 @@
         }
       }
 
-      function resetProductForm() {
+           function resetProductForm() {
         productForm.reset();
         document.getElementById("product-id").value = "";
         document.getElementById("product-price").value = "0";
         document.getElementById("product-stock").value = "0";
+
         document.getElementById("form-title").textContent = "Add a product";
         document.getElementById("form-caption").textContent =
           "New items appear in the product catalog.";
+
         document.getElementById("save-product").innerHTML =
           '<i class="fa-solid fa-plus" aria-hidden="true"></i> Add product';
+
         document.getElementById("cancel-edit").hidden = true;
-        document.getElementById("image-path-field").hidden = true;
         document.getElementById("image-hint").hidden = false;
         document.getElementById("product-image").required = false;
       }
@@ -1158,22 +1157,25 @@
           product.description || "";
         document.getElementById("product-price").value = product.price ?? 0;
         document.getElementById("product-stock").value = product.stock ?? 0;
-        document.getElementById("product-image-path").value =
-          product.image || "";
+
+        // Clear any previously selected file.
+        document.getElementById("product-image").value = "";
+
         document.getElementById("form-title").textContent = "Edit product";
         document.getElementById("form-caption").textContent =
           `Editing ${product.name}`;
+
         document.getElementById("save-product").innerHTML =
           '<i class="fa-solid fa-check" aria-hidden="true"></i> Save changes';
+
         document.getElementById("cancel-edit").hidden = false;
-        document.getElementById("image-path-field").hidden = false;
-        document.getElementById("image-hint").hidden = true;
+        document.getElementById("image-hint").hidden = false;
         document.getElementById("product-image").required = false;
+
         document
           .getElementById("products-section")
           .scrollIntoView({ behavior: "smooth", block: "start" });
       }
-
       async function deleteProduct(product) {
         if (!window.confirm(`Delete “${product.name}” from the catalog?`))
           return;
@@ -1233,9 +1235,11 @@
       document
         .getElementById("cancel-edit")
         .addEventListener("click", resetProductForm);
-      productForm.addEventListener("submit", async (event) => {
+          productForm.addEventListener("submit", async (event) => {
         event.preventDefault();
+
         const productId = document.getElementById("product-id").value;
+
         const payload = {
           name: document.getElementById("product-name").value.trim(),
           category: document.getElementById("product-category").value.trim(),
@@ -1245,31 +1249,44 @@
           price: Number(document.getElementById("product-price").value),
           stock: Number(document.getElementById("product-stock").value),
         };
+
         const saveButton = document.getElementById("save-product");
         saveButton.disabled = true;
+
         try {
+          const formData = new FormData();
+
+          Object.entries(payload).forEach(([key, value]) => {
+            formData.append(key, String(value));
+          });
+
+          const imageInput = document.getElementById("product-image");
+          const image = imageInput.files[0];
+
+          // An image is optional when editing an existing product.
+          // If supplied, the backend will upload it to Supabase Storage.
+          if (image) {
+            formData.append("image", image);
+          }
+
           if (productId) {
-            payload.image = document
-              .getElementById("product-image-path")
-              .value.trim();
             await api(`/api/admin/products/${productId}`, {
               method: "PATCH",
-              body: JSON.stringify(payload),
+              body: formData,
             });
-            showToast("Product updated.");
-          } else {
-            const formData = new FormData();
-            Object.entries(payload).forEach(([key, value]) =>
-              formData.append(key, String(value)),
+
+            showToast(
+              image ? "Product updated with new image." : "Product updated.",
             );
-            const image = document.getElementById("product-image").files[0];
-            if (image) formData.append("image", image);
+          } else {
             await api("/api/admin/products", {
               method: "POST",
               body: formData,
             });
+
             showToast("Product added.");
           }
+
           resetProductForm();
           await loadData();
         } catch (error) {
