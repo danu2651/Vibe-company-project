@@ -377,7 +377,51 @@
         background: rgba(255, 255, 255, 0.62);
 
       }
+      /* Mobile header refinement */
+@media (max-width: 1023px) {
+  #site-header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
 
+  #site-header .navbar-shell {
+    height: 4.25rem;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 1rem;
+  }
+
+  #site-header .navbar-shell > a img {
+    height: 2.5rem;
+    max-width: 10rem;
+  }
+
+  #mobile-menu-btn {
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+/* Keep the mobile drawer beside the fixed navbar, even after scrolling */
+@media (max-width: 1023px) {
+  #mobile-menu {
+    position: fixed;
+    top: 5.25rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    z-index: 49;
+    margin: 0;
+    max-height: calc(100dvh - 6rem);
+    overflow-y: auto;
+  }
+}
+  #site-header.is-scrolled .navbar-shell {
+    background: rgba(255, 255, 255, 0.94);
+    border-color: rgba(226, 232, 240, 0.8);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  }
+}
 
 
       /* Hero Animation */
@@ -5073,16 +5117,21 @@
 
 
       // Mobile menu toggle
+const mobileMenuButton = document.getElementById("mobile-menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
 
-      document
+mobileMenuButton.addEventListener("click", function () {
+  const isHidden = mobileMenu.classList.toggle("hidden");
 
-        .getElementById("mobile-menu-btn")
+  mobileMenuButton.setAttribute("aria-expanded", String(!isHidden));
+});
 
-        .addEventListener("click", function () {
-
-          document.getElementById("mobile-menu").classList.toggle("hidden");
-
-        });
+mobileMenu.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    mobileMenu.classList.add("hidden");
+    mobileMenuButton.setAttribute("aria-expanded", "false");
+  });
+});
 
 
 
